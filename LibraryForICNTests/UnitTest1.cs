@@ -409,6 +409,7 @@ namespace LibraryForICNTests
 
             //сравнение результатов
             Assert.AreEqual(expected, actual);
+
         }
     }
 }
