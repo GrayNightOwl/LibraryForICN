@@ -166,6 +166,7 @@ namespace LibraryForICN
                     region = "Пермский край";
             }
             return region.Trim();
+
         }
 
     }
