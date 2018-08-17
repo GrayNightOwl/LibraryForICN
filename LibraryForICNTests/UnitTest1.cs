@@ -135,8 +135,8 @@ namespace LibraryForICNTests
         public void Street_inputString9_resultString() //как это оформить на русском?
         {
             //вход
-            string s = " гор Юрчимск, дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Алтайский Край ,";
-            string expected = "548788, Алтайский Край, г. Юрчимск, ул. Растеряева, д. 116Б, кв. 45";
+            string s = " пос Юрчимск, дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Алтайский Край ,";
+            string expected = "548788, Алтайский Край, пос. Юрчимск, ул. Растеряева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
             AdressForCompile res = adress.ParseAdress(s);
