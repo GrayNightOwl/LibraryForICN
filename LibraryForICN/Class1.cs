@@ -48,23 +48,23 @@ namespace LibraryForICN
             return result;
         }
 
-        public AdressForCompile ParseAdress(string s)
+        public AdressForCompile ParseAdress(string s) 
         {
             AdressForCompile result = new AdressForCompile();
-            result.CorrectAdress = true;
-            result.index = Index(s);
-            result.region = Region(s); //может вернуть регион по умолчанию
-            result.area = Area(s);         // result.area = Area(s); //может вернуть район по умолчанию
-            result.city = City(s); //может вернуть город по умолчанию
-            result.street = Street(s); //если не указано - вернуть ошибку
-            result.house = House(s); //если не указано - вернуть ошибку
+            result.CorrectAdress = true; //изначально считаем адрес корректным
+            result.index = Index(s);     //может вернуть индекс по умолчанию
+            result.region = Region(s);   //может вернуть регион по умолчанию
+            result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+            result.city = City(s);       //может вернуть город по умолчанию
+            result.street = Street(s);   //если не указано - вернуть ошибку
+            result.house = House(s);     //если не указано - вернуть ошибку
             if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
             {
-                result.CorrectAdress = false;
+                result.CorrectAdress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
                 return result;
             }
             else
-                result.flat = Flat(s); //
+                result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
             return result;
         }
 
