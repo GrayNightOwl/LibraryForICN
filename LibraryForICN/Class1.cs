@@ -158,7 +158,7 @@ namespace LibraryForICN
 
 
 
-        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенная функция применения двух регулярных выражений
+        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
         {
             string result = "";
             MatchCollection matches = regex1.Matches(s);
@@ -183,13 +183,13 @@ namespace LibraryForICN
             return result;
         }
 
-        private string MatchWithOneRegex(Regex regex1, string s)
+        private string MatchWithOneRegex(Regex regex1, string s) //вынесенный метод применения одного регулярного выражения
         {
             string result = "";
             MatchCollection matches = regex1.Matches(s);
 
 
-            if (matches.Count > 0)
+            if (matches.Count > 0)  //если найден результат применения первого регулярного выражения - запомним его
             {
                 foreach (Match match in matches)
                 {
