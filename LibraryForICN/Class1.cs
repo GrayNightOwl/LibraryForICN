@@ -28,7 +28,7 @@ namespace LibraryForICN
 
             result = result + adress.index + ", ";
             result = result + adress.region + ", ";
-            if (adress.area == "")
+            if (adress.area != "")
             {
                 result = result + adress.area + ", ";
             }
@@ -53,7 +53,7 @@ namespace LibraryForICN
             result.CorrectAdress = true;
             result.index = Index(s);
             result.region = Region(s); //может вернуть регион по умолчанию
-                                       // result.area = Area(s); //может вернуть район по умолчанию
+            result.area = Area(s);         // result.area = Area(s); //может вернуть район по умолчанию
             result.city = City(s); //может вернуть город по умолчанию
             result.street = Street(s); //если не указано - вернуть ошибку
             result.house = House(s); //если не указано - вернуть ошибку
@@ -111,6 +111,26 @@ namespace LibraryForICN
             if (region == "") region = "Пермский край";
             return region.Trim();
         }
+
+
+
+        private string Area(string s)
+        {
+            s = "," + s + ",";
+            string area = "";
+            // string s = " д. 70/2, улСоловьева, кв. 45, край Пермский ,  614285   , город  Пермь , ";
+            Regex regex1 = new Regex(@",(\s*(?:[А-я]|-)*\s+р[А-я]*\s*),+.*");
+            Regex regex2 = new Regex(@",(\s*район[А-я]*\s+(?:[А-я]|-)*)+\s*,+.*");
+            Regex regex3 = new Regex(@",(\s*р(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,+.*");
+            area = MatchWithTwoRegex(regex1, regex2, s);
+            if (area == "")
+            {
+                area = MatchWithOneRegex(regex3, s);
+            }
+            //if (area == "") area = "Пермский район"; 
+            return area.Trim();
+        }
+
 
         //private string Area(string s)
         //{
