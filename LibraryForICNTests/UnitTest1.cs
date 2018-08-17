@@ -115,5 +115,53 @@ namespace LibraryForICNTests
             //сравнение результатов
             Assert.AreEqual(expected, actual);
         }
+
+
+        [TestMethod]
+        public void Street_inputString8_resultString() //как это оформить на русском?
+        {
+            //вход
+            string s = "дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Приморский Край , г Окраина";
+            string expected = "548788, Приморский Край, г. Окраина, ул. Растеряева, д. 116Б, кв. 45";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Street_inputString9_resultString() //как это оформить на русском?
+        {
+            //вход
+            string s = " гор Юрчимск, дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Алтайский Край ,";
+            string expected = "548788, Алтайский Край, г. Юрчимск, ул. Растеряева, д. 116Б, кв. 45";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
+
+
+
+        [TestMethod]
+        public void Street_inputString10_resultString() //как это оформить на русском?
+        {
+            //вход
+            string s = "дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Приморский Край , г Край";
+            string expected = "548788, Приморский Край, г. Окраина, ул. Растеряева, д. 116Б, кв. 45";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
