@@ -100,5 +100,20 @@ namespace LibraryForICNTests
             //сравнение результатов
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Street_inputString7_resultString() //как это оформить на русском?
+        {
+            //вход
+            string s = " дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , город  Распушил ,";
+            string expected = "548788, область Ростовская, г. Распушил, ул. Растеряева, д. 116Б, кв. 45";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
