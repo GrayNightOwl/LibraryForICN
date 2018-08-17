@@ -52,6 +52,7 @@ namespace LibraryForICN
         {
             AdressForCompile result = new AdressForCompile();
             result.CorrectAdress = true; //изначально считаем адрес корректным
+            s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
             result.index = Index(s);     //может вернуть индекс по умолчанию
             result.region = Region(s);   //может вернуть регион по умолчанию
             result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
@@ -74,41 +75,36 @@ namespace LibraryForICN
 
 
 
-        private string Index(string s)
+        private string Index(string s) 
         {
-            s = "," + s + ",";
-            string index = "";
-            Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");
-            index = MatchWithOneRegex(regex1, s);
+            string index = "";                              //ищем участок следующего вида: 
+            Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
+            index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
             if (index == "") index = "Не удалось распознать индекс";
-            return index.Trim();
+            return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
         }
         
 
         private string Region(string s)
         {
-            s = "," + s + ",";
-            string region = "";
-            // string s = " д. 70/2, улСоловьева, кв. 45, край Пермский ,  614285   , город  Пермь , ";
-            Regex regex1 = new Regex(@",(\s*(?:[А-я]|-)*\s+(?:кр|о)+[А-я]*\s*),+.*");
-            Regex regex2 = new Regex(@",(\s*(?:кр|о)+[А-я]*\s+(?:[А-я]|-)*)+\s*,+.*");
-            Regex regex3 = new Regex(@",(\s*(?:кр|о)(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,+.*");
-            region = MatchWithTwoRegex(regex1, regex2, s);
-            if (region == "")
+            string region = "";                                                             //разделено на 2 части:
+            Regex regex1 = new Regex(@",(\s*(?:[А-я]|-)*\s+(?:кр|о|Кр)+[А-я]*\s*),+.*");       //запятая, пробелы, название, признак кр/о, дополненный до конца, пробелы, запятая, окончание
+            Regex regex2 = new Regex(@",(\s*(?:кр|о|Кр)+[А-я]*\s+(?:[А-я]|-)*)+\s*,+.*");      //запятая, признак кр/о, дополенный до конца, пробел, название, пробелы, запятая, окончание
+            Regex regex3 = new Regex(@",(\s*(?:кр|о|Кр)(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,+.*"); //запятая, признак кр/о, дополенный до конца из маленьких букв, Большая буква, окончание названия, запятая
+            region = MatchWithTwoRegex(regex1, regex2, s);  //применяем 2 регулярных выражения
+            if (region == "")                               //если поиск по пробелу ничего не дал  - применим поиск по большой букве
             {
                 region = MatchWithOneRegex(regex3, s);
             }
-            if (region == "") region = "Пермский край";
-            return region.Trim();
+            if (region == "") region = "Пермский край";     //если распознать регион не удалось- назначим регион по умолчанию
+            return region.Trim();                           //вернём значение, лишённое пробелов с левой и правой стороны
         }
 
 
 
-        private string Area(string s)
+        private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         {
-            s = "," + s + ",";
             string area = "";
-            // string s = " д. 70/2, улСоловьева, кв. 45, край Пермский ,  614285   , город  Пермь , ";
             Regex regex1 = new Regex(@",(\s*(?:[А-я]|-)*\s+р[А-я]*\s*),+.*");
             Regex regex2 = new Regex(@",(\s*район[А-я]*\s+(?:[А-я]|-)*)+\s*,+.*");
             Regex regex3 = new Regex(@",(\s*р(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,+.*");
@@ -117,32 +113,14 @@ namespace LibraryForICN
             {
                 area = MatchWithOneRegex(regex3, s);
             }
-            //if (area == "") area = "Пермский район"; 
             return area.Trim();
         }
 
-
-        //private string Area(string s)
-        //{
-        //    s = ", " + s + " ,";
-        //    string area = "";
-        //    // string s = "614000, кв4 , дом 15,   улица. 1-я Красноармейская   , г. Москва,   край Пермский,район Пермский ,"
-        //    // string s = "614000, кв4 , дом 15,   улица. 1-я Красноармейская   , г. Москва,   край Пермский, Пермский район , "
-        //    //Regex regex1 = new Regex(@"(,\s*(?:[А-я]|-)*(?:,р|\s+р)[А-я]*\s*(?:[А-я]|-)*\s*),+.*")
-        //    Regex regex1 = new Regex(@",\s*");
-        //    Regex regex2 = new Regex(@",\s*р(?:[а-я]|-)*\s+([А-Я](?:[А-я]|-|\s)+)\s*,+.*");
-        //    area = MatchWithTwoRegex(regex1, regex2, s);
-        //    area.Replace(",", "");
-        //    return area.Trim();
-        //}
-
-        private string City(string s)
+       private string City(string s)
         {
-            s = "," + s + ",";
             string city = "";
-
-            Regex regex1 = new Regex(@",\s*(?:г|Г)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s)+)\s*,+.*");
-            Regex regex2 = new Regex(@",\s*(?:г|Г)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*");
+            Regex regex1 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s)+)\s*,+.*");
+            Regex regex2 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*");
             city = MatchWithTwoRegex(regex1, regex2, s); //если ошибка- вернётся пустая строка
             if (city == "") city = "Пермь"; //если распознавание ничего не дало- вернём значение по умолчанию для города
             return city.Trim();
@@ -151,7 +129,6 @@ namespace LibraryForICN
 
         private string Street(string s)
         {
-            s = "," + s + ",";
             string street = "";
             Regex regex1 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*(?:\.|\s)+((?:[0-9]|[А-я]|-|\s)+)\s*,+.*"); //добавлены цифры
             Regex regex2 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*");
@@ -162,9 +139,7 @@ namespace LibraryForICN
 
         private string House(string s)
         {
-            s = "," + s + ",";
             string house;
-
             Regex regex1 = new Regex(@",\s*(?:д|Д)(?:[А-я]|-)*(?:\.|\s)*(\d+(?:/|\s|[А-я])?\d*)\s*,+.*");
             MatchCollection matches = regex1.Matches(s);
             house = MatchWithOneRegex(regex1, s);
@@ -174,7 +149,6 @@ namespace LibraryForICN
 
         private string Flat(string s)
         {
-            s = "," + s + ",";
             string flat = "";
             Regex regex1 = new Regex(@",\s*(?:к|К)(?:[А-я]|-)*(?:\.|\s)*(\d+)\s*,+.*");
             flat = MatchWithOneRegex(regex1, s);
