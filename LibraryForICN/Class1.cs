@@ -8,9 +8,9 @@ using System.Text.RegularExpressions;
 namespace LibraryForICN
 {
 
-    public class AdressForCompile
+    public class AdressForCompile //Данный класс существует в качестве структуры данных, хранящей адрес, используется для сборки и разборки адреса
     {
-        public bool CorrectAdress;
+        public bool CorrectAdress; //признаки корректности адреса, устанавливается в "false" в случае отстутствия названия улицы или номера дома
         public string index;
         public string region;
         public string area;
@@ -26,14 +26,15 @@ namespace LibraryForICN
         {
             string result = "";
 
-            result = result + adress.index + ", ";
-            result = result + adress.region + ", ";
-            if (adress.area != "")
-            {
-                result = result + adress.area + ", ";
+            result = result + adress.index + ", "; //индекс и регион назначаются по умолчанию, поэтому их можно присоединять к строке
+            result = result + adress.region + ", "; // без опасений в нулевых значениях, ставить после них запятые
+
+            if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
+            {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
+                result = result + adress.area + ", "; 
             }
-            result = result + "г. " + adress.city + ", ";
-            if (adress.CorrectAdress == true) //если адрес корректный - то улица и дом распознаны
+            result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
+            if (adress.CorrectAdress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
             {
                 result = result + "ул. " + adress.street + ", ";
                 result = result + "д. " + adress.house;
@@ -42,7 +43,7 @@ namespace LibraryForICN
                     result = result + ", кв. " + adress.flat;
                 }
             }
-            else { result = "Некорректный адрес"; };
+            else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
 
             return result;
         }
@@ -82,18 +83,7 @@ namespace LibraryForICN
             if (index == "") index = "Не удалось распознать индекс";
             return index.Trim();
         }
-
-        //private string Region(string s)
-        //{
-        //    s = "," + s + ",";
-        //    string region = "";
-        //    // string s = " д. 70/2, улСоловьева, кв. 45, край Пермский ,  614285   , город  Пермь , ";
-        //    Regex regex1 = new Regex(@",(\s*(?:[А-я]|-)*\s*(?:кр|КР|Кр|кР|о)+[А-я]*\s*(?:[А-я]|-)*)+\s*,+.*");
-        //    Regex regex2 = new Regex(@",(\s*(?:кр|Кр|КР|о)(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,+.*");
-        //    region = MatchWithTwoRegex(regex1, regex2, s);
-        //    if (region == "") region = "Пермский край";
-        //    return region.Trim();
-        //}
+        
 
         private string Region(string s)
         {
