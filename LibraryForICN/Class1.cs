@@ -119,8 +119,8 @@ namespace LibraryForICN
        private string City(string s)
         {
             string city = "";
-            Regex regex1 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s)+)\s*,+.*");
-            Regex regex2 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*");
+            Regex regex1 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s)+)\s*,+.*"); //запятая, пробелы, город/деревня/посёлок, разделитель, название, пробелы, запятая
+            Regex regex2 = new Regex(@",\s*(?:г|дер|п)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*"); //тип населённого пункта, маленькими буквами, с большой буквы название 
             city = MatchWithTwoRegex(regex1, regex2, s); //если ошибка- вернётся пустая строка
             if (city == "") city = "Пермь"; //если распознавание ничего не дало- вернём значение по умолчанию для города
             return city.Trim();
@@ -130,17 +130,17 @@ namespace LibraryForICN
         private string Street(string s)
         {
             string street = "";
-            Regex regex1 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*(?:\.|\s)+((?:[0-9]|[А-я]|-|\s)+)\s*,+.*"); //добавлены цифры
-            Regex regex2 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*");
+            Regex regex1 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*(?:\.|\s)+((?:[0-9]|[А-я]|-|\s)+)\s*,+.*"); //запятая, признак улицы, разделитель, название может состоять из цифр, букв, пробелов, пробелы, запятая
+            Regex regex2 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,+.*"); //запятая, признак улицы маленькими буквами, может быть разделитель, большие буквы, пробелы, тире в названии
             street = MatchWithTwoRegex(regex1, regex2, s);
-            if (street == "") street = "Не удалось распознать улицу";
+            if (street == "") street = "Не удалось распознать улицу"; //возвращаем значение по умолчанию, ошибк
             return street.Trim();
         }
 
         private string House(string s)
         {
             string house;
-            Regex regex1 = new Regex(@",\s*(?:д|Д)(?:[А-я]|-)*(?:\.|\s)*(\d+(?:/|\s|[А-я])?\d*)\s*,+.*");
+            Regex regex1 = new Regex(@",\s*(?:д|Д)(?:[А-я]|-)*(?:\.|\s)*(\d+(?:/|\s|[А-я])?\d*)\s*,+.*"); //запятая, признак дома, разделитель, цифры, '/', буквы, снова цифры, пробелы, окончание адреса
             MatchCollection matches = regex1.Matches(s);
             house = MatchWithOneRegex(regex1, s);
             if (house == "") house = "Не удалось распознать дом";
@@ -150,7 +150,7 @@ namespace LibraryForICN
         private string Flat(string s)
         {
             string flat = "";
-            Regex regex1 = new Regex(@",\s*(?:к|К)(?:[А-я]|-)*(?:\.|\s)*(\d+)\s*,+.*");
+            Regex regex1 = new Regex(@",\s*(?:к|К)(?:[А-я]|-)*(?:\.|\s)*(\d+)\s*,+.*"); //запятая, признак квартиры, продолжение, разделитель, номер, пробелы, запятая, окончание адреса
             flat = MatchWithOneRegex(regex1, s);
             if (flat == "") flat = "Не удалось распознать квартиру";
             return flat.Trim();
@@ -158,25 +158,25 @@ namespace LibraryForICN
 
 
 
-        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s)
+        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенная функция применения двух регулярных выражений
         {
             string result = "";
             MatchCollection matches = regex1.Matches(s);
-            if (matches.Count > 0)
+            if (matches.Count > 0)  //если найден результат применения первого регулярного выражения - запомним его
             {
                 foreach (Match match in matches)
                 {
-                    result = match.Groups[1].Value;
+                    result = match.Groups[1].Value; 
                 }
             }
             else
             {
-                MatchCollection matches2 = regex2.Matches(s);
+                MatchCollection matches2 = regex2.Matches(s); //иначе применим второе регулярное выражение
                 if (matches2.Count > 0)
                 {
                     foreach (Match match in matches2)
                     {
-                        result = match.Groups[1].Value;
+                        result = match.Groups[1].Value;//все регулярные выражения написаны таким образом, чтобы результат находился в 1 ячейке массива результатов
                     }
                 }
             }
