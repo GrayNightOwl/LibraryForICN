@@ -8,16 +8,30 @@ namespace LibraryForICNTests
     public class AdressTests
     {
         [TestMethod]
+        public void Street_inputString1_resultString() //как это оформить на русском?
+        {
+            //вход
+            string s = "  Приморский край ,  625000   , г.  Край ,  кв4 , дом 15,   улица 1-я Красноармейская   , ";
+            string expected = "625000, Приморский край, г. Край, ул. 1-я Красноармейская, д. 15, кв. 4";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void Street_inputString2_resultString() //как это оформить на русском?
         {
             //вход
-
-            string s = "ул Синяя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
+            string s = " д. 70Б,ул Гагарина бульвар, край Пермский ,  614000   , город  Пермь , ";
+            string expected = "614000, край Пермский, г. Пермь, ул. Гагарина бульвар, д. 70Б";
             //получаем значения
             Adress adress = new Adress();
-            string actual = adress.Street(s);
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
 
             //сравнение результатов
             Assert.AreEqual(expected, actual);
@@ -27,27 +41,28 @@ namespace LibraryForICNTests
         public void Street_inputString3_resultString() //как это оформить на русском?
         {
             //вход
-            string s = "ул. Синяя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
+            string s = " д. 70/2, улСоловьева, кв. 45, край Пермский ,  614285   , город  Пермь , ";
+            string expected = "614285, край Пермский, г. Пермь, ул. Соловьева, д. 70/2, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            string actual = adress.Street(s);
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
 
             //сравнение результатов
             Assert.AreEqual(expected, actual);
         }
 
+
         [TestMethod]
         public void Street_inputString4_resultString() //как это оформить на русском?
         {
             //вход
-            string s = "ул.Синяя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
+            string s = " д. 70/2, улСоловьева, кв. 45, край Пермский ,  614285   , город  Край , ";
+            string expected = "614285, край Пермский, г. Край, ул. Соловьева, д. 70/2, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            string actual = adress.Street(s);
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
 
             //сравнение результатов
             Assert.AreEqual(expected, actual);
@@ -58,354 +73,12 @@ namespace LibraryForICNTests
         public void Street_inputString5_resultString() //как это оформить на русском?
         {
             //вход
-            string s = "улСиняя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
+            string s = " дом 116Б, улицаСоловьева, кв-ра45, область Магаданская ,  548788   , город  Магадан , ";
+            string expected = "548788, область Магаданская, г. Магадан, ул. Соловьева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputString6_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "УлСиняя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputString7_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул Синяя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputString8_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул. Синяя, г Пермь,кв4 , дом 15";
-            string expected = "Синяя";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords1_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул. Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords2_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords3_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул. Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords4_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул.Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords5_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "улГенерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords6_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "УлГенерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords7_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул.Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords8_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWords9_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул. Генерала Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash1_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул.Генерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash2_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул Генерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash3_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "Ул. Генерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash4_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "УлГенерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash5_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул.Генерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash6_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул Генерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash7_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул. Генерала-Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала-Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringWithTwoWordsWithADash8_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "    улГенерала - Лизюкова    , г Пермь,кв4 , дом 15";
-            string expected = "Генерала - Лизюкова";
-
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-        
-        [TestMethod]
-        public void Street_inputStringWithSpaces_resultString() //как это оформить на русском?
-        { 
-            //вход
-            string s = "улГенерала - Лизюкова, г Пермь,кв4 , дом 15";
-            string expected = "Генерала - Лизюкова";
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
-
-            //сравнение результатов
-            Assert.AreEqual(expected, actual);
-        }
-
-
-        [TestMethod]
-        public void Street_inputStringDifficult_resultString() //как это оформить на русском?
-        {
-            //вход
-            string s = "ул. 1-я Красноармейская, г Пермь,кв4 , дом 15";
-            string expected = "1-я Красноармейская";
-            //получаем значения
-            Adress adress = new Adress();
-            string actual = adress.Street(s);
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
 
             //сравнение результатов
             Assert.AreEqual(expected, actual);
