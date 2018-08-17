@@ -133,11 +133,13 @@ namespace LibraryForICNTests
         }
 
         [TestMethod]
-        public void Street_inputString9_resultString() //как это оформить на русском?
+        public void Street_inputString9_resultString() //посёлок определяется верно, однако на последнем этапе он приводится к типу "город"
         {
             //вход
             string s = " пос Юрчимск, дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Алтайский Край ,";
             string expected = "548788, Алтайский Край, пос. Юрчимск, ул. Растеряева, д. 116Б, кв. 45";
+            //фактический результат: "548788, Алтайский Край, г. Юрчимск, ул. Растеряева, д. 116Б, кв. 45"
+
             //получаем значения
             Adress adress = new Adress();
             AdressForCompile res = adress.ParseAdress(s);
@@ -150,11 +152,60 @@ namespace LibraryForICNTests
 
 
         [TestMethod]
-        public void Street_inputString10_resultString() //как это оформить на русском?
+        public void Street_inputString10_resultString() //тест не проходит из-за того, что "город Край" распознается как город Край и как "край под названием "город""
         {
             //вход
-            string s = "дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788   , Приморский Край , г Край";
-            string expected = "548788, Приморский Край, г. Окраина, ул. Растеряева, д. 116Б, кв. 45";
+            string s = "дом 116Б, ул. Растеряева, кв-ра45, область Ростовская ,  548788  , город Край";
+            string expected = "548788, Приморский Край, г. Край, ул. Растеряева, д. 116Б, кв. 45";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void Street_inputString11_resultString() //без индекса
+        {
+            //вход
+            string s = "дом 116Б, ул. Растеряева, кв-ра45,  Приморский Край , г Край";
+            string expected = "Приморский Край, г. Край, ул. Растеряева, д. 116Б, кв. 45";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void Street_inputString12_resultString() //минимально допустимый адрес
+        {
+            //вход
+            string s = "дом 116Б, ул. Растеряева";
+            string expected = "Пермский край, г. Пермь, ул. Растеряева, д. 116Б";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void Street_inputString13_resultString() //наиболее сложный адрес 
+        {
+            //вход
+            //Еврейская Автономная область, Биробиджанский район, город Биробиджан, улица Степана Разина, дом 115/1, квартира 12
+            string s = "614000, Еврейская Автономная область, Биробиджанский район, город Биробиджан , улица Степана Разина , дом 115/1, квартира 12 ";
+            string expected = "Пермский край, г. Пермь, ул. Растеряева, д. 116Б";
             //получаем значения
             Adress adress = new Adress();
             AdressForCompile res = adress.ParseAdress(s);
