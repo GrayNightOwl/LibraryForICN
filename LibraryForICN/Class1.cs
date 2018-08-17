@@ -25,9 +25,13 @@ namespace LibraryForICN
         public string CompileAdress(AdressForCompile adress)
         {
             string result = "";
-
-            result = result + adress.index + ", "; //индекс и регион назначаются по умолчанию, поэтому их можно присоединять к строке
-            result = result + adress.region + ", "; // без опасений в нулевых значениях, ставить после них запятые
+            
+            if (adress.index !="Не удалось распознать индекс")
+            {
+                result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
+            }
+            
+            result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
 
             if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
             {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
@@ -43,7 +47,7 @@ namespace LibraryForICN
                     result = result + ", кв. " + adress.flat;
                 }
             }
-            else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
+            //else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
 
             return result;
         }
