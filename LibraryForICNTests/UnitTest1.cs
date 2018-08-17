@@ -215,5 +215,21 @@ namespace LibraryForICNTests
             //сравнение результатов
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Street_inputString14_resultString() //тест с названием города с цифрами
+        {
+            //вход
+            //Еврейская Автономная область, Биробиджанский район, город Биробиджан, улица Степана Разина, дом 115/1, квартира 12
+            string s = " 614825 , Еврейская Автономная область, Спасо Преображенский район, город 13-й километр , улица Степана Разина вторая , дом 115/1, квартира 12 ";
+            string expected = "614825, Еврейская Автономная область, Спасо Преображенский район, г. 13-й километр, ул. Степана Разина вторая, д. 115/1, кв. 12";
+            //получаем значения
+            Adress adress = new Adress();
+            AdressForCompile res = adress.ParseAdress(s);
+            string actual = adress.CompileAdress(res);
+
+            //сравнение результатов
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
