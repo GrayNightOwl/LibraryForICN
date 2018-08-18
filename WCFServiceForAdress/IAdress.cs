@@ -10,19 +10,19 @@ using LibraryForICN;
 namespace WCFServiceForAdress
 {
     [ServiceContract(Namespace = "AdressNamespace")]
-    public interface IntAdress
+    public interface IntAddress
     {
         [OperationContract]
-        string CompileAdress(AdressStructure adress);
+        string CompileAddress(AdressStructure address);
         [OperationContract]
-        AdressStructure ParseAdress(string s);
+        AdressStructure ParseAddress(string s);
     }
 
     // Используйте контракт данных, как показано в примере ниже, чтобы добавить составные типы к операциям служб.
     [DataContract]
     public class AdressStructure
     {
-        public bool CorrectAdress; //признаки корректности адреса, устанавливается в "false" в случае отстутствия названия улицы или номера дома
+        public bool CorrectAddress; //признаки корректности адреса, устанавливается в "false" в случае отстутствия названия улицы или номера дома
         public string index;
         public string region;
         public string area;
