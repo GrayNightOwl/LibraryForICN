@@ -5,22 +5,33 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-using LibraryForICN;
 
 namespace WCFServiceForAdress
 {
-    [ServiceContract(Namespace = "AdressNamespace")]
+    [ServiceContract(Namespace = "AddressNS")]
     public interface IntAddress
     {
+
         [OperationContract]
-        string CompileAddress(AdressStructure address);
+        string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat);
+
         [OperationContract]
-        AdressStructure ParseAddress(string s);
+        string[] ParseAddress(string s);
+
+        //[OperationContract]
+        //string CompileAddress(AddressStructure address);
+
+
+        //[OperationContract]
+        //AdressStructure ParseAddress(string s);
+
+
+
+
     }
 
-    // Используйте контракт данных, как показано в примере ниже, чтобы добавить составные типы к операциям служб.
     [DataContract]
-    public class AdressStructure
+    public class AddressStructure
     {
         public bool CorrectAddress; //признаки корректности адреса, устанавливается в "false" в случае отстутствия названия улицы или номера дома
         public string index;
