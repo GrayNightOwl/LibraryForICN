@@ -11,7 +11,7 @@ namespace WCFServiceForAdress
     [ServiceContract(Namespace = "AddressNS")]
     public interface IntAddress
     {
-
+        
         [OperationContract]
         string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat);
 
