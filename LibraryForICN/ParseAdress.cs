@@ -84,11 +84,7 @@ namespace LibraryForICN
             return result;
         }
 
-
-
-
-
-
+        
 
         private string Index(string s) 
         {
@@ -99,7 +95,6 @@ namespace LibraryForICN
             return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
         }
         
-
         private string Region(string s)
         {  
             string region = "";                                                             //разделено на 2 части:
@@ -110,8 +105,7 @@ namespace LibraryForICN
             if (region == "") region = "Пермский край";                                     //если распознать регион не удалось- назначим регион по умолчанию
             return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
         }
-
-
+        
         private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         {
             string area = "";
@@ -131,8 +125,7 @@ namespace LibraryForICN
             if (city == "") city = "Пермь"; //если распознавание ничего не дало- вернём значение по умолчанию для города
             return city.Trim();
         }
-
-
+        
         private string Street(string s)
         {
             string street = "";
@@ -161,8 +154,6 @@ namespace LibraryForICN
             if (flat == "") flat = "Не удалось распознать квартиру";
             return flat.Trim();
         }
-
-
 
 
 
