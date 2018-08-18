@@ -76,6 +76,10 @@
       <Project>{ba67678d-3ec5-4e0b-b0b6-86bd2b826177}</Project>
       <Name>LibraryForICNTests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibraryForICN\LibraryForICN.csproj">
+      <Project>{ddf9c5e9-3c60-46a1-89dc-b369c5c07053}</Project>
+      <Name>LibraryForICN</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
