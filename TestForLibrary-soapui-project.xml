@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="23156fae-8861-4eda-8621-b3ac2bb91217" activeEnvironment="Default" name="TestForLibrary" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="e55aafa7-ef87-4143-aeae-21e47986ef6d" wsaVersion="NONE" name="BasicHttpBinding_IntAddress" type="wsdl" bindingName="{AddressNS}BasicHttpBinding_IntAddress" soapVersion="1_1" anonymous="optional" definition="http://localhost:12345/Adress.svc?singleWsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:12345/Adress.svc?singleWsdl"><con:part><con:url>http://localhost:12345/Adress.svc?singleWsdl</con:url><con:content><![CDATA[<wsdl:definitions name="Service1" targetNamespace="AddressNS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="AddressNS" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="AddressNS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:element name="CompileAddressFromSet">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="index" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="region" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="area" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="city" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="street" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="house" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="flat" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CompileAddressFromSetResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CompileAddressFromSetResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ParseAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="s" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ParseAddressResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ParseAddressResult" nillable="true" type="q1:ArrayOfstring" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IntAddress_CompileAddressFromSet_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompileAddressFromSet"/>
+  </wsdl:message>
+  <wsdl:message name="IntAddress_CompileAddressFromSet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompileAddressFromSetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IntAddress_ParseAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseAddress"/>
+  </wsdl:message>
+  <wsdl:message name="IntAddress_ParseAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseAddressResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IntAddress">
+    <wsdl:operation name="CompileAddressFromSet">
+      <wsdl:input wsaw:Action="AddressNS/IntAddress/CompileAddressFromSet" message="tns:IntAddress_CompileAddressFromSet_InputMessage"/>
+      <wsdl:output wsaw:Action="AddressNS/IntAddress/CompileAddressFromSetResponse" message="tns:IntAddress_CompileAddressFromSet_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ParseAddress">
+      <wsdl:input wsaw:Action="AddressNS/IntAddress/ParseAddress" message="tns:IntAddress_ParseAddress_InputMessage"/>
+      <wsdl:output wsaw:Action="AddressNS/IntAddress/ParseAddressResponse" message="tns:IntAddress_ParseAddress_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IntAddress" type="tns:IntAddress">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CompileAddressFromSet">
+      <soap:operation soapAction="AddressNS/IntAddress/CompileAddressFromSet" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseAddress">
+      <soap:operation soapAction="AddressNS/IntAddress/ParseAddress" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IntAddress" binding="tns:BasicHttpBinding_IntAddress">
+      <soap:address location="http://localhost:12345/Adress.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint></con:endpoints><con:operation id="1443222e-5d67-4ed6-8eef-e23e64753b03" isOneWay="false" action="AddressNS/IntAddress/CompileAddressFromSet" name="CompileAddressFromSet" bindingOperationName="CompileAddressFromSet" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cc102783-3c43-4bd9-8c6f-0022bcd51b23" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:CompileAddressFromSet>
+         <!--Optional:-->
+         <add:index>614000</add:index>
+         <!--Optional:-->
+         <add:region>Пермский край</add:region>
+         <!--Optional:-->
+         <add:area></add:area>
+         <!--Optional:-->
+         <add:city>Пермь</add:city>
+         <!--Optional:-->
+         <add:street>бульвар Гагарина</add:street>
+         <!--Optional:-->
+         <add:house>ав</add:house>
+         <!--Optional:-->
+         <add:flat>'n'</add:flat>
+      </add:CompileAddressFromSet>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4e1f17c4-c87e-4338-93b1-90eae3f8621d" isOneWay="false" action="AddressNS/IntAddress/ParseAddress" name="ParseAddress" bindingOperationName="ParseAddress" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d7efbc6-49b4-467d-820c-f00a62c8fc06" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>город Гродно, Гомельский район, д. 35, улица Лягасова, 614в12</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="7181b0a8-8bfe-4a36-95ae-fde3c085061e" name="TestSuiteForLibrary"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="65f2f9a7-66ea-4513-b725-dce5b79e266b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestOfCompile" searchProperties="true"><con:settings/><con:testStep type="request" id="98cec36d-1f00-4b1b-bf83-eaa4865232e6" name="CompileAddressFromSet - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddressFromSet</con:operation><con:request name="CompileAddressFromSet - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="ecc45085-e895-4957-ac2d-2d85352f73a9"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddressFromSet>\r
+         <!--Optional:-->\r
+         <add:index>614000</add:index>\r
+         <!--Optional:-->\r
+         <add:region>Пермский край</add:region>\r
+         <!--Optional:-->\r
+         <add:area></add:area>\r
+         <!--Optional:-->\r
+         <add:city>Пермь</add:city>\r
+         <!--Optional:-->\r
+         <add:street>бульвар Гагарина</add:street>\r
+         <!--Optional:-->\r
+         <add:house>70Б</add:house>\r
+         <!--Optional:-->\r
+         <add:flat></add:flat>\r
+      </add:CompileAddressFromSet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="c148ed99-32be-475f-923b-19f149a2f2b4" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="5e57f359-addc-4138-a0d1-76688f2a0ca7" name="CompileAddressFromSet - Request 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddressFromSet</con:operation><con:request name="CompileAddressFromSet - Request 2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="f247ae40-45c9-4e4b-9472-08038f2f551a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddressFromSet>\r
+         <!--Optional:-->\r
+         <add:index>614000</add:index>\r
+         <!--Optional:-->\r
+         <add:region>Йошкар-Олинская область</add:region>\r
+         <!--Optional:-->\r
+         <add:area>Полевой район</add:area>\r
+         <!--Optional:-->\r
+         <add:city>Карачинск</add:city>\r
+         <!--Optional:-->\r
+         <add:street>1-ая красноармейская</add:street>\r
+         <!--Optional:-->\r
+         <add:house>15</add:house>\r
+         <!--Optional:-->\r
+         <add:flat>26</add:flat>\r
+      </add:CompileAddressFromSet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3b032220-8a57-46a5-9af9-0adb94ae0d7f" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="c18d462c-f9a8-4f93-be0b-6b62550b69b9" name="CompileAddressFromSet - IncorrectAddress"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddressFromSet</con:operation><con:request name="CompileAddressFromSet - IncorrectAddress" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="fdbb944d-f821-4935-8ab0-d45d0cb664da"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddressFromSet>\r
+         <!--Optional:-->\r
+         <add:index>614251</add:index>\r
+         <!--Optional:-->\r
+         <add:region></add:region>
+         <add:area></add:area>\r
+         <!--Optional:-->\r
+         <add:city></add:city>\r
+         <!--Optional:-->\r
+         <add:street></add:street>\r
+         <!--Optional:-->\r
+         <add:house></add:house>\r
+         <!--Optional:-->\r
+         <add:flat></add:flat>\r
+      </add:CompileAddressFromSet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="5cb5da83-7371-4cda-9aed-11d8e1b25450" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="4f87f961-0f46-4b16-aaae-98cf5cf8f3ab" name="CompileAddressFromSet -LetterInIndexOrFlat"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddressFromSet</con:operation><con:request name="CompileAddressFromSet -LetterInIndexOrFlat" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="559c3123-bddf-4a80-bf27-8a8a5e7389ab"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddressFromSet>\r
+         <!--Optional:-->\r
+         <add:index>Слово</add:index>\r
+         <!--Optional:-->\r
+         <add:region>Слово</add:region>
+         <add:area></add:area>\r
+         <!--Optional:-->\r
+         <add:city>Слово</add:city>\r
+         <!--Optional:-->\r
+         <add:street>Слово</add:street>\r
+         <!--Optional:-->\r
+         <add:house>Слово</add:house>\r
+         <!--Optional:-->\r
+         <add:flat>65</add:flat>\r
+      </add:CompileAddressFromSet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2a283dc9-e8fc-4a6b-aa21-a9bb3539a6d5" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="edb3002a-1da6-4b88-8c88-5a7c95f48141" name="CompileAddressFromSet - MinimumData"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddressFromSet</con:operation><con:request name="CompileAddressFromSet - MinimumData" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="78604290-f4e3-4aa7-b263-d7fd53f0ca2b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddressFromSet>\r
+         <!--Optional:-->\r
+         <add:index></add:index>\r
+         <!--Optional:-->\r
+         <add:region></add:region>
+         <add:area></add:area>\r
+         <!--Optional:-->\r
+         <add:city></add:city>\r
+         <!--Optional:-->\r
+         <add:street>Крупской</add:street>\r
+         <!--Optional:-->\r
+         <add:house>20</add:house>\r
+         <!--Optional:-->\r
+         <add:flat></add:flat>\r
+      </add:CompileAddressFromSet>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="7de3a5a6-7db4-43aa-8e7c-5e63ba1456cc" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="7b8ba445-a1c5-48a3-9120-ee2778a2431c" name="CompileAddressFromSet - IncorrectAddress2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddressFromSet</con:operation><con:request name="CompileAddressFromSet - IncorrectAddress2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="e40cef34-8637-4c96-b8bc-5ee598582a02"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:CompileAddressFromSet>
+         <!--Optional:-->
+         <add:index>614000</add:index>
+         <!--Optional:-->
+         <add:region>Пермский край</add:region>
+         <!--Optional:-->
+         <add:area></add:area>
+         <!--Optional:-->
+         <add:city>Пермь</add:city>
+         <!--Optional:-->
+         <add:street>бульвар Гагарина</add:street>
+         <!--Optional:-->
+         <add:house>ав</add:house>
+         <!--Optional:-->
+         <add:flat>'n'</add:flat>
+      </add:CompileAddressFromSet>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="87900af5-326e-4df6-8785-998b6a10e041" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="0a15acbd-2075-476d-b8c0-c37068982b04" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestOfParse" searchProperties="true"><con:settings/><con:testStep type="request" id="67bb026e-ca45-4aca-93ab-5ac10a474aac" name="ParseAddress - EmptyAddress"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - EmptyAddress" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c442f549-a3fa-4567-bf5c-6f22ed1e61f8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>?</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="520b5d54-1f20-4b29-a943-21e5271afae1" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="99eecd56-5403-4adb-a992-483016cfe676" name="ParseAddress - NormalAddress1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - NormalAddress1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bbe2eab0-0511-46f4-bc15-08c884d9cdb2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:ParseAddress>
+         <!--Optional:-->
+         <add:s>д35,кв12, г. Кунгур, Кунгурский район, 625111,улица Алферова</add:s>
+      </add:ParseAddress>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="ab6358d3-a92b-4fbc-b718-bd3892a8c22d" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="6d695474-75cb-4007-a94b-6625228983fa" name="ParseAddress - NormalAddress2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - NormalAddress2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="7f6178a9-4b79-4152-95dd-52f4f9c28e9d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:ParseAddress>
+         <!--Optional:-->
+         <add:s>дом. 35,кв-ра.   12, пос. Суксун, Суксунский район, 311100,улица Ландау, Пермская область</add:s>
+      </add:ParseAddress>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="90399051-f0ab-48df-b9df-7fafc2f119ae" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="67406f49-3c60-4417-ae27-06ebaeff0595" name="ParseAddress - LessSpaces"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - LessSpaces" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="60432e2d-debd-453c-b9fb-e670d9198a17"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:ParseAddress>
+         <!--Optional:-->
+         <add:s>дом1/1,кв12, посСуксун, Суксунский район, 311100,улицаЛандау,Пермская область</add:s>
+      </add:ParseAddress>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="97ba471c-a154-4e8a-8cdb-401c7886c8ab" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="60230257-d995-4afa-8442-73f9e2c037ed" name="ParseAddress - VillageWithMoreSpaces"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - VillageWithMoreSpaces" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="d90f7f2f-141e-4b87-9dfa-a630881aef10"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:ParseAddress>
+         <!--Optional:-->
+         <add:s>   д.    12Б/2   ,   кварт.     12, деревня   Краснознаменная  , Кишертский район, 212000, улица Ленина, Лениградская область</add:s>
+      </add:ParseAddress>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="5c9c5545-4cec-4e07-96de-4e655c35af7c" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="dce353c8-8007-4849-adf1-583e3978a111" name="ParseAddress - ErrorTest"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - ErrorTest" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="c57d0a0d-7d0f-4543-b216-9cf955f905a4"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <add:ParseAddress>
+         <!--Optional:-->
+         <add:s>625000,   край  Кемеровский, город Край, ул. Улькина, д. А45, кв. 32, </add:s>
+      </add:ParseAddress>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="a361f012-4284-42a0-8f30-14b1bbf14dcc" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="4a236429-b360-4a34-8f1d-19d581e496f1" name="ParseAddress - StrangeCityButNoErrors"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - StrangeCityButNoErrors" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="77c6addc-07d7-46e9-9899-e1372775d571"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>612000, Свердловская область, город Край, улица К Маркса, д 12, кв. 13</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b2b3126a-252b-48c5-b178-44e585523b75" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="ae1d513f-ffa0-4ca3-8f08-405c671ccf41" name="ParseAddress - ErrorInParsingCity"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - ErrorInParsingCity" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="3358f6dc-e855-4d98-836e-0cc7558035e5"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>Гомельский район, город Гомель, д. 35, улица Лягасова</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="1f50d289-18be-44e8-a9fd-b77361b8f0de" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="891c5224-ab18-4c49-b28f-9bace70c64dc" name="ParseAddress - NoErrorsButSimilarCity"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - NoErrorsButSimilarCity" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="7575f8b5-6317-448f-a00e-84ecc287743a"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>город Гомель, Гомельский район, домм 35Б, улицца Лягасова, 612000</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b0710180-f5af-49f6-a5e6-6f162e1ea728" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="2547e9ed-e2db-4ef0-8a43-c3a087f21782" name="ParseAddress - IncorrectIndexButCorrectWork"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - IncorrectIndexButCorrectWork" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="ed6340db-eeee-40fa-a3a0-e9dd164abec3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>город Гродно, Гомельский район, д. 35, улица Лягасова, 614в12</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="9ed4d440-627e-4bcd-b057-24e552cbb0b8" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
