@@ -19,7 +19,7 @@ namespace LibraryForICN
      * код ошибки?
     */
 
-    public class AdressForCompile //Данный класс существует в качестве структуры данных, хранящей адрес, используется для сборки и разборки адреса
+    public class AdressStructure //Данный класс существует в качестве структуры данных, хранящей адрес, используется для сборки и разборки адреса
     {
         public bool CorrectAdress; //признаки корректности адреса, устанавливается в "false" в случае отстутствия названия улицы или номера дома
         public string index;
@@ -33,7 +33,7 @@ namespace LibraryForICN
 
     public class Adress
     {
-        public string CompileAdress(AdressForCompile adress)
+        public string CompileAdress(AdressStructure adress)
         {
             string result = "";
             
@@ -63,9 +63,9 @@ namespace LibraryForICN
             return result;
         }
 
-        public AdressForCompile ParseAdress(string s) 
+        public AdressStructure ParseAdress(string s) 
         {
-            AdressForCompile result = new AdressForCompile();
+            AdressStructure result = new AdressStructure();
             result.CorrectAdress = true; //изначально считаем адрес корректным
             s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
             result.index = Index(s);     //может вернуть индекс по умолчанию
@@ -112,7 +112,6 @@ namespace LibraryForICN
         }
 
 
-
         private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         {
             string area = "";
@@ -123,7 +122,7 @@ namespace LibraryForICN
             return area.Trim();
         }
 
-       private string City(string s)
+        private string City(string s)
         {
             string city = "";
             Regex regex1 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s|\d|-)+)\s*,"); //запятая, пробелы, город/деревня/посёлок, разделитель, название, пробелы, запятая
