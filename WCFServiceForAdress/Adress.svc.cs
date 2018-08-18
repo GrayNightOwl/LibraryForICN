@@ -65,6 +65,7 @@ namespace WCFServiceForAdress
             return mas;
         } //парсер адреса из строки, получает объект, преобразует в строку с помощью CompileAdress
 
+
         private string CompileAddress(AddressStructure adress)
         {
             string result = "";
@@ -94,20 +95,58 @@ namespace WCFServiceForAdress
 
             return result;
         }
-
-        //private string Index(string s)
-        //{
-        //    string index = "";                              //ищем участок следующего вида: 
-        //    Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
-        //    index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
-        //    if (index == "") index = "Не удалось распознать индекс";
-        //    return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
-        //}
-
+        
         private string Index(string s)
         {
             return addr.Index(s);
         }
+        
+        private string Region(string s)
+        {
+            return addr.Region(s);
+        }
+        
+        private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
+        {
+            return addr.Area(s);
+        }
+
+        private string City(string s)
+        {
+            return addr.City(s);
+        }
+
+        private string Street(string s)
+        {
+            return addr.Street(s);
+        }
+
+        private string House(string s)
+        {
+            return addr.House(s);
+        }
+        
+        private string Flat(string s)
+        {
+            return addr.Flat(s);
+        }
+
+
+        private string MatchWithOneRegex(Regex regex1, string s) //вынесенный метод применения одного регулярного выражения
+        {
+            return addr.MatchWithOneRegex(regex1, s);
+        }
+
+        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
+        {
+            return addr.MatchWithTwoRegex(regex1,regex2, s);
+        }
+
+        private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
+        {
+            return addr.MatchWithThreeRegex(regex1, regex2,regex3, s);
+        }
+
 
         //private string Region(string s)
         //{
@@ -120,10 +159,6 @@ namespace WCFServiceForAdress
         //    return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
         //}
 
-        private string Region(string s)
-        {
-            return addr.Region(s);
-        }
 
         //private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         //{
@@ -136,11 +171,6 @@ namespace WCFServiceForAdress
         //}
 
 
-        private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
-        {
-            return addr.Area(s);
-        }
-
         //private string City(string s)
         //{
         //    string city = "";
@@ -151,10 +181,6 @@ namespace WCFServiceForAdress
         //    return city.Trim();
         //}
 
-        private string City(string s)
-        {
-            return addr.City(s);
-        }
 
         //private string Street(string s)
         //{
@@ -166,11 +192,6 @@ namespace WCFServiceForAdress
         //    return street.Trim();
         //}
 
-        private string Street(string s)
-        {
-            return addr.Street(s);
-        }
-
         //private string House(string s)
         //{
         //    string house;
@@ -181,12 +202,6 @@ namespace WCFServiceForAdress
         //    return house.Trim();
         //}
 
-
-        private string House(string s)
-        {
-            return addr.House(s);
-        }
-
         //private string Flat(string s)
         //{
         //    string flat = "";
@@ -195,11 +210,6 @@ namespace WCFServiceForAdress
         //    if (flat == "") flat = "Не удалось распознать квартиру";
         //    return flat.Trim();
         //}
-
-        private string Flat(string s)
-        {
-            return addr.Flat(s);
-        }
 
 
         //private string MatchWithOneRegex(Regex regex1, string s) //вынесенный метод применения одного регулярного выражения
@@ -219,11 +229,6 @@ namespace WCFServiceForAdress
         //}
 
 
-        private string MatchWithOneRegex(Regex regex1, string s) //вынесенный метод применения одного регулярного выражения
-        {
-            return addr.MatchWithOneRegex(regex1, s);
-        }
-
         //private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
         //{
         //    string result = "";
@@ -233,10 +238,7 @@ namespace WCFServiceForAdress
         //    return result;
         //}
 
-        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
-        {
-            return addr.MatchWithTwoRegex(regex1,regex2, s);
-        }
+
 
         //private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
         //{
@@ -249,11 +251,15 @@ namespace WCFServiceForAdress
         //    return result;
         //}
 
-        private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
-        {
-            return addr.MatchWithThreeRegex(regex1, regex2,regex3, s);
-        }
 
 
+        //private string Index(string s)
+        //{
+        //    string index = "";                              //ищем участок следующего вида: 
+        //    Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
+        //    index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
+        //    if (index == "") index = "Не удалось распознать индекс";
+        //    return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
+        //}
     }
 }
