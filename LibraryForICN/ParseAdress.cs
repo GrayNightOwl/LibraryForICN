@@ -41,19 +41,35 @@ namespace LibraryForICN
                 if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
                 {
 
-                    if (adress.index != "Не удалось распознать индекс")
+                    if ((adress.index != "Не удалось распознать индекс")||(adress.index !=""))
                     {
                         result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
                     }
 
-                    result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+                    if (adress.region == "")
+                    {
+                        result = result + "Пермский край, ";
+                    }
+                    else
+                    {
+                        result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+                    }
 
                     if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
                     {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
                         result = result + adress.area + ", ";
                     }
-                    result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
 
+                    if (adress.city == "")
+                    {
+                        result = result + "г. Пермь, "; //город назначается по умолчанию, добавляем
+                    }
+                    else
+                    {
+                        result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем
+                    }
+
+                    
                     result = result + "ул. " + adress.street + ", ";
                     result = result + "д. " + adress.house;
                     if ((adress.flat != "Не удалось распознать квартиру") && (adress.flat != ""))
@@ -149,8 +165,9 @@ namespace LibraryForICN
             try
             {
                 AddressStructure addressStructure = new AddressStructure();
-                Regex regex1 = new Regex(@"([А-я])");
-                if ((region == "") || (city == "") || (street == "") || (house == "")|| (MatchWithOneRegex(regex1, index) != "")||(MatchWithOneRegex(regex1, flat) != ""))
+                Regex regex1 = new Regex(@"(\D)");
+                Regex regex2 = new Regex(@"(\d)");
+                if ((street == "") || (house == "")|| (MatchWithOneRegex(regex1, index) != "")||(MatchWithOneRegex(regex1, flat) != "")|| (MatchWithOneRegex(regex2, house) == ""))
                 {
 
                     addressStructure.CorrectAddress = false;
@@ -158,7 +175,7 @@ namespace LibraryForICN
                 else
                 {
                     addressStructure.CorrectAddress = true;
-                    addressStructure.index = (MatchWithOneRegex(regex1, index));
+                    addressStructure.index = index;
                     addressStructure.region = region;
                     addressStructure.area = area;
                     addressStructure.city = city;
@@ -184,7 +201,7 @@ namespace LibraryForICN
             {
 
                 string index = "";                              //ищем участок следующего вида: 
-                Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
+                Regex regex1 = new Regex(@",(\s*\d{6}\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
                 index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
                 if (index == "") index = "Не удалось распознать индекс";
                 return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
