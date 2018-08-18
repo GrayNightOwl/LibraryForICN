@@ -14,23 +14,6 @@ namespace WCFServiceForAdress
     {
         AdressFromLIB addr = new AdressFromLIB();
 
-        //public string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat)
-        //{   //создаёт объект типа Адрес, передаёт в функцию сборки из объекта 
-
-        //    AddressStructure addressStructure = new AddressStructure();
-        //    addressStructure.CorrectAddress = true;
-        //    addressStructure.index = index;
-        //    addressStructure.region = region;
-        //    addressStructure.area = area;
-        //    addressStructure.city = city;
-        //    addressStructure.street = street;
-        //    addressStructure.house = house;
-        //    addressStructure.flat = flat;
-
-        //    return addr.CompileAddress(addressStructure);
-
-        //}
-
         public string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat)
         {   //создаёт объект типа Адрес, передаёт в функцию сборки из объекта 
             return addr.CompileAddressFromSet(index, region, area, city, street, house, flat);
