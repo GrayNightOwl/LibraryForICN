@@ -86,11 +86,7 @@ namespace LibraryForICN
 
 
 
-
-
-
-
-        private string Index(string s) 
+        public string Index(string s) 
         {
             string index = "";                              //ищем участок следующего вида: 
             Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
@@ -98,9 +94,8 @@ namespace LibraryForICN
             if (index == "") index = "Не удалось распознать индекс";
             return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
         }
-        
 
-        private string Region(string s)
+        public string Region(string s)
         {  
             string region = "";                                                             //разделено на 2 части:
             Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+(?:кр|о|Кр)+[А-я]*\s*),");       //запятая, пробелы, название, признак кр/о, дополненный до конца, пробелы, запятая, окончание
@@ -111,8 +106,7 @@ namespace LibraryForICN
             return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
         }
 
-
-        private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
+        public string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         {
             string area = "";
             Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+р[А-я]*\s*),");
@@ -122,7 +116,7 @@ namespace LibraryForICN
             return area.Trim();
         }
 
-        private string City(string s)
+        public string City(string s)
         {
             string city = "";
             Regex regex1 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s|\d|-)+)\s*,"); //запятая, пробелы, город/деревня/посёлок, разделитель, название, пробелы, запятая
@@ -132,8 +126,7 @@ namespace LibraryForICN
             return city.Trim();
         }
 
-
-        private string Street(string s)
+        public string Street(string s)
         {
             string street = "";
             Regex regex1 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*(?:\.|\s)+((?:[0-9]|[А-я]|-|\s)+)\s*,"); //запятая, признак улицы, разделитель, название может состоять из цифр, букв, пробелов, пробелы, запятая
@@ -143,7 +136,7 @@ namespace LibraryForICN
             return street.Trim();
         }
 
-        private string House(string s)
+        public string House(string s)
         {
             string house;
             Regex regex1 = new Regex(@",\s*(?:д|Д)(?:[А-я]|-)*(?:\.|\s)*(\d+(?:/|\s|[А-я])*\d*)\s*,"); //запятая, признак дома, разделитель, цифры, '/', буквы, снова цифры, пробелы, окончание адреса
@@ -153,7 +146,7 @@ namespace LibraryForICN
             return house.Trim();
         }
 
-        private string Flat(string s)
+        public string Flat(string s)
         {
             string flat = "";
             Regex regex1 = new Regex(@",\s*(?:к|К)(?:[А-я]|-)*(?:\.|\s)*(\d+)\s*,"); //запятая, признак квартиры, продолжение, разделитель, номер, пробелы, запятая, окончание адреса
@@ -161,8 +154,6 @@ namespace LibraryForICN
             if (flat == "") flat = "Не удалось распознать квартиру";
             return flat.Trim();
         }
-
-
 
 
 
