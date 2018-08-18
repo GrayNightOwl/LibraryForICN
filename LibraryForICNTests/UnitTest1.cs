@@ -17,7 +17,7 @@ namespace LibraryForICNTests
             string expected = "625000, Приморский край, г. Край, ул. 1-я Красноармейская, д. 15, кв. 4";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -32,7 +32,7 @@ namespace LibraryForICNTests
             string expected = "614000, край Пермский, г. Пермь, ул. Гагарина бульвар, д. 70Б";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -47,7 +47,7 @@ namespace LibraryForICNTests
             string expected = "614285, край Пермский, г. Пермь, ул. Соловьева, д. 70/2, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -63,7 +63,7 @@ namespace LibraryForICNTests
             string expected = "614285, край Пермский, г. Край, ул. Соловьева, д. 70/2, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -79,7 +79,7 @@ namespace LibraryForICNTests
             string expected = "548788, область Магаданская, г. Магадан, ул. Соловьева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -95,7 +95,7 @@ namespace LibraryForICNTests
             string expected = "548788, область Ростовская, район Ивановский, г. Распушил, ул. Растеряева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -110,7 +110,7 @@ namespace LibraryForICNTests
             string expected = "548788, область Ростовская, г. Распушил, ул. Растеряева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -126,7 +126,7 @@ namespace LibraryForICNTests
             string expected = "548788, Приморский Край, г. Окраина, ул. Растеряева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -143,7 +143,7 @@ namespace LibraryForICNTests
 
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -160,7 +160,7 @@ namespace LibraryForICNTests
             string expected = "548788, Приморский Край, г. Край, ул. Растеряева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -176,7 +176,7 @@ namespace LibraryForICNTests
             string expected = "Приморский Край, г. Край, ул. Растеряева, д. 116Б, кв. 45";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -192,7 +192,7 @@ namespace LibraryForICNTests
             string expected = "Пермский край, г. Пермь, ул. Растеряева, д. 116Б";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -209,7 +209,7 @@ namespace LibraryForICNTests
             string expected = "614825, Еврейская Автономная область, Спасо Преображенский район, г. Биробиджан, ул. Степана Разина вторая, д. 115/1, кв. 12";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
@@ -225,7 +225,7 @@ namespace LibraryForICNTests
             string expected = "614825, Еврейская Автономная область, Спасо Преображенский район, г. 13-й километр, ул. Степана Разина вторая, д. 115Б/1, кв. 12";
             //получаем значения
             Adress adress = new Adress();
-            AdressForCompile res = adress.ParseAdress(s);
+            AdressStructure res = adress.ParseAdress(s);
             string actual = adress.CompileAdress(res);
 
             //сравнение результатов
