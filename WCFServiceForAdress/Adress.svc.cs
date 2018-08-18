@@ -29,7 +29,7 @@ namespace WCFServiceForAdress
                 addressStructure.house = house;
                 addressStructure.flat = flat;
 
-                return addr.CompileAdress(adressStructure);
+                return addr.CompileAddress(addressStructure);
 
             }
 
