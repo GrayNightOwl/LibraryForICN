@@ -41,8 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LibraryForICN, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LibraryForICN">
       <HintPath>..\LibraryForICN\bin\Debug\LibraryForICN.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
