@@ -314,22 +314,36 @@ namespace LibraryForICN
 
         public string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
         {
-            string result = "";
-            result = MatchWithOneRegex(regex1, s);
-            if (result == "")
-                result = MatchWithOneRegex(regex2, s);
-            return result;
+            try
+            {
+                string result = "";
+                result = MatchWithOneRegex(regex1, s);
+                if (result == "")
+                    result = MatchWithOneRegex(regex2, s);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ("Во время применения двух регулярных выражений возникло исключение " + Convert.ToString(ex));
+            }
         }
 
         public string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
         {
-            string result = "";
-            result = MatchWithOneRegex(regex1, s);
-            if (result == "")
-                result = MatchWithOneRegex(regex2, s);
-            if (result == "")
-                result = MatchWithOneRegex(regex3, s);
-            return result;
+            try
+            {
+                string result = "";
+                result = MatchWithOneRegex(regex1, s);
+                if (result == "")
+                    result = MatchWithOneRegex(regex2, s);
+                if (result == "")
+                    result = MatchWithOneRegex(regex3, s);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ("Во время применения трёх регулярных выражений возникло исключение " + Convert.ToString(ex));
+            }
         }
 
     }
