@@ -18,16 +18,6 @@ namespace WCFServiceForAdress
         [OperationContract]
         string[] ParseAddress(string s);
 
-        //[OperationContract]
-        //string CompileAddress(AddressStructure address);
-
-
-        //[OperationContract]
-        //AdressStructure ParseAddress(string s);
-
-
-
-
     }
 
     [DataContract]
