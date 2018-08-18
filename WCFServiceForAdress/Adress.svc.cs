@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-using LibraryForICN;
 using System.Text.RegularExpressions;
 
 namespace WCFServiceForAdress
@@ -14,7 +13,112 @@ namespace WCFServiceForAdress
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
     public class Service1 : IntAddress
     {
-        public string CompileAddress(AdressStructure adress)
+
+        
+        public string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat)
+        {
+            AddressStructure addressStructure = new AddressStructure();
+            addressStructure.CorrectAddress = true;
+            addressStructure.index = index;
+            addressStructure.region = region;
+            addressStructure.area = area;
+            addressStructure.city = city;
+            addressStructure.street = street;
+            addressStructure.house = house;
+            addressStructure.flat = flat;
+
+            return CompileAddress(addressStructure);
+              
+            //string result = "";
+
+            //if (adress.index != "Не удалось распознать индекс")
+            //{
+            //    result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
+            //}
+
+            //result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+
+            //if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
+            //{                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
+            //    result = result + adress.area + ", ";
+            //}
+            //result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
+            //if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
+            //{
+            //    result = result + "ул. " + adress.street + ", ";
+            //    result = result + "д. " + adress.house;
+            //    if (adress.flat != "Не удалось распознать квартиру")
+            //    {
+            //        result = result + ", кв. " + adress.flat;
+            //    }
+            //}
+            //else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
+
+            //return result;
+        } //создаёт объект типа Адрес, передаёт в функцию сборки из объекта 
+
+        public string[] ParseAddress(string s)
+        {
+
+            string[] mas = new string[7];
+            AddressStructure result = new AddressStructure();
+            result.CorrectAddress = true; //изначально считаем адрес корректным
+            s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
+            result.index = Index(s);     //может вернуть индекс по умолчанию
+            result.region = Region(s);   //может вернуть регион по умолчанию
+            result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+            result.city = City(s);       //может вернуть город по умолчанию
+            result.street = Street(s);   //если не указано - вернуть ошибку
+            result.house = House(s);     //если не указано - вернуть ошибку
+            if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+            {
+                result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
+                //return CompileAddress(result);
+            }
+            else
+
+            {
+                result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
+                mas[6] = result.flat;
+            }
+            //return CompileAddress(result);
+            mas[0] = result.index;
+            mas[1] = result.region;
+            mas[2] = result.area;
+            mas[3] = result.city;
+            mas[4] = result.street;
+            mas[5] = result.house;
+            return mas;
+        } //парсер адреса из строки, получает объект, преобразует в строку с помощью CompileAdress
+
+        //public AdressStructure ParseAddress(string s)
+        //{
+        //    AdressStructure result = new AdressStructure();
+        //    result.CorrectAddress = true; //изначально считаем адрес корректным
+        //    s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
+        //    result.index = Index(s);     //может вернуть индекс по умолчанию
+        //    result.region = Region(s);   //может вернуть регион по умолчанию
+        //    result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+        //    result.city = City(s);       //может вернуть город по умолчанию
+        //    result.street = Street(s);   //если не указано - вернуть ошибку
+        //    result.house = House(s);     //если не указано - вернуть ошибку
+        //    if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+        //    {
+        //        result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
+        //        return result;
+        //    }
+        //    else
+        //        result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
+        //    return result;
+        //}
+
+
+
+
+
+
+
+        private string CompileAddress(AddressStructure adress)
         {
             string result = "";
 
@@ -34,7 +138,7 @@ namespace WCFServiceForAdress
             {
                 result = result + "ул. " + adress.street + ", ";
                 result = result + "д. " + adress.house;
-                if (adress.flat != "Не удалось распознать квартиру")
+                if ((adress.flat != "Не удалось распознать квартиру")&&(adress.flat != ""))
                 {
                     result = result + ", кв. " + adress.flat;
                 }
@@ -44,29 +148,7 @@ namespace WCFServiceForAdress
             return result;
         }
 
-        public AdressStructure ParseAddress(string s)
-        {
-            AdressStructure result = new AdressStructure();
-            result.CorrectAddress = true; //изначально считаем адрес корректным
-            s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-            result.index = Index(s);     //может вернуть индекс по умолчанию
-            result.region = Region(s);   //может вернуть регион по умолчанию
-            result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
-            result.city = City(s);       //может вернуть город по умолчанию
-            result.street = Street(s);   //если не указано - вернуть ошибку
-            result.house = House(s);     //если не указано - вернуть ошибку
-            if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
-            {
-                result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
-                return result;
-            }
-            else
-                result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
-            return result;
-        }
-
-
-        public string Index(string s)
+        private string Index(string s)
         {
             string index = "";                              //ищем участок следующего вида: 
             Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
@@ -75,7 +157,7 @@ namespace WCFServiceForAdress
             return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
         }
 
-        public string Region(string s)
+        private string Region(string s)
         {
             string region = "";                                                             //разделено на 2 части:
             Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+(?:кр|о|Кр)+[А-я]*\s*),");       //запятая, пробелы, название, признак кр/о, дополненный до конца, пробелы, запятая, окончание
@@ -86,7 +168,7 @@ namespace WCFServiceForAdress
             return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
         }
 
-        public string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
+        private string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         {
             string area = "";
             Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+р[А-я]*\s*),");
@@ -96,7 +178,7 @@ namespace WCFServiceForAdress
             return area.Trim();
         }
 
-        public string City(string s)
+        private string City(string s)
         {
             string city = "";
             Regex regex1 = new Regex(@",\s*(?:г|Г|дер|Дер|п)(?:[а-я]|-)*(?:\.|\s)+((?:[А-я]|-|\s|\d|-)+)\s*,"); //запятая, пробелы, город/деревня/посёлок, разделитель, название, пробелы, запятая
@@ -106,7 +188,7 @@ namespace WCFServiceForAdress
             return city.Trim();
         }
 
-        public string Street(string s)
+        private string Street(string s)
         {
             string street = "";
             Regex regex1 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*(?:\.|\s)+((?:[0-9]|[А-я]|-|\s)+)\s*,"); //запятая, признак улицы, разделитель, название может состоять из цифр, букв, пробелов, пробелы, запятая
@@ -116,7 +198,7 @@ namespace WCFServiceForAdress
             return street.Trim();
         }
 
-        public string House(string s)
+        private string House(string s)
         {
             string house;
             Regex regex1 = new Regex(@",\s*(?:д|Д)(?:[А-я]|-)*(?:\.|\s)*(\d+(?:/|\s|[А-я])*\d*)\s*,"); //запятая, признак дома, разделитель, цифры, '/', буквы, снова цифры, пробелы, окончание адреса
@@ -126,7 +208,7 @@ namespace WCFServiceForAdress
             return house.Trim();
         }
 
-        public string Flat(string s)
+        private string Flat(string s)
         {
             string flat = "";
             Regex regex1 = new Regex(@",\s*(?:к|К)(?:[А-я]|-)*(?:\.|\s)*(\d+)\s*,"); //запятая, признак квартиры, продолжение, разделитель, номер, пробелы, запятая, окончание адреса
@@ -171,6 +253,7 @@ namespace WCFServiceForAdress
                 result = MatchWithOneRegex(regex3, s);
             return result;
         }
+        
 
     }
 }
