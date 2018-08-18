@@ -35,139 +35,190 @@ namespace LibraryForICN
     {
         public string CompileAddress(AddressStructure adress)
         {
-            string result = "";
-
-            if (adress.index != "Не удалось распознать индекс")
+            try
             {
-                result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
-            }
+                string result = "";
 
-            result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
-
-            if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
-            {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
-                result = result + adress.area + ", ";
-            }
-            result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
-            if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
-            {
-                result = result + "ул. " + adress.street + ", ";
-                result = result + "д. " + adress.house;
-                if ((adress.flat != "Не удалось распознать квартиру") && (adress.flat != ""))
+                if (adress.index != "Не удалось распознать индекс")
                 {
-                    result = result + ", кв. " + adress.flat;
+                    result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
                 }
-            }
-            else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
 
-            return result;
+                result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+
+                if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
+                {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
+                    result = result + adress.area + ", ";
+                }
+                result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
+                if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
+                {
+                    result = result + "ул. " + adress.street + ", ";
+                    result = result + "д. " + adress.house;
+                    if ((adress.flat != "Не удалось распознать квартиру") && (adress.flat != ""))
+                    {
+                        result = result + ", кв. " + adress.flat;
+                    }
+                }
+                else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ("При сборке адреса возникло исключение "+ Convert.ToString(ex));
+            }
         }
 
         public AddressStructure ParseAdress(string s) 
         {
-            AddressStructure result = new AddressStructure();
-            result.CorrectAddress = true; //изначально считаем адрес корректным
-            s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-            result.index = Index(s);     //может вернуть индекс по умолчанию
-            result.region = Region(s);   //может вернуть регион по умолчанию
-            result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
-            result.city = City(s);       //может вернуть город по умолчанию
-            result.street = Street(s);   //если не указано - вернуть ошибку
-            result.house = House(s);     //если не указано - вернуть ошибку
-            if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+            try
             {
-                result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
+                AddressStructure result = new AddressStructure();
+                result.CorrectAddress = true; //изначально считаем адрес корректным
+                s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
+                result.index = Index(s);     //может вернуть индекс по умолчанию
+                result.region = Region(s);   //может вернуть регион по умолчанию
+                result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+                result.city = City(s);       //может вернуть город по умолчанию
+                result.street = Street(s);   //если не указано - вернуть ошибку
+                result.house = House(s);     //если не указано - вернуть ошибку
+                if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+                {
+                    result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
+                    return result;
+                }
+                else
+                    result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
                 return result;
             }
-            else
-                result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
-            return result;
+            catch (Exception ex)
+            {
+                AddressStructure faultResult = new AddressStructure(); //создаём новый объект
+                faultResult.CorrectAddress = false; //считаем его ошибочным
+                faultResult.region = "При разборке адреса возникло исключение "+ Convert.ToString(ex);
+                return faultResult;
+            }
         } //парсер адреса из строки, получает объект, преобразует в AddressStructure
 
         public string[] ParseAddress(string s)
         {
-
-            string[] mas = new string[7];
-            AddressStructure result = new AddressStructure();
-            result.CorrectAddress = true; //изначально считаем адрес корректным
-            s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-            result.index = Index(s);     //может вернуть индекс по умолчанию
-            result.region = Region(s);   //может вернуть регион по умолчанию
-            result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
-            result.city = City(s);       //может вернуть город по умолчанию
-            result.street = Street(s);   //если не указано - вернуть ошибку
-            result.house = House(s);     //если не указано - вернуть ошибку
-            if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+            try
             {
-                result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
-                                               //return CompileAddress(result);
-            }
-            else
+                string[] mas = new string[7];
+                AddressStructure result = new AddressStructure();
+                result.CorrectAddress = true; //изначально считаем адрес корректным
+                s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
+                result.index = Index(s);     //может вернуть индекс по умолчанию
+                result.region = Region(s);   //может вернуть регион по умолчанию
+                result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+                result.city = City(s);       //может вернуть город по умолчанию
+                result.street = Street(s);   //если не указано - вернуть ошибку
+                result.house = House(s);     //если не указано - вернуть ошибку
+                if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+                {
+                    result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
+                                                   //return CompileAddress(result);
+                }
+                else
 
-            {
-                result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
-                mas[6] = result.flat;
+                {
+                    result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
+                    mas[6] = result.flat;
+                }
+                //return CompileAddress(result);
+                mas[0] = result.index;
+                mas[1] = result.region;
+                mas[2] = result.area;
+                mas[3] = result.city;
+                mas[4] = result.street;
+                mas[5] = result.house;
+                return mas;
             }
-            //return CompileAddress(result);
-            mas[0] = result.index;
-            mas[1] = result.region;
-            mas[2] = result.area;
-            mas[3] = result.city;
-            mas[4] = result.street;
-            mas[5] = result.house;
-            return mas;
+            catch (Exception ex)
+            {
+                string[] faultMas = new string[7];
+                faultMas[0] = "При попытке разборке адреса в набор элементов возникло исключение " + Convert.ToString(ex);
+                return faultMas;
+            }
         } //парсер адреса из строки, получает объект, преобразует в массив строк
 
         public string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat)  //создаёт объект типа Адрес, передаёт в функцию сборки из объекта 
         {
+            try
+            {
+                AddressStructure addressStructure = new AddressStructure();
+                addressStructure.CorrectAddress = true;
+                addressStructure.index = index;
+                addressStructure.region = region;
+                addressStructure.area = area;
+                addressStructure.city = city;
+                addressStructure.street = street;
+                addressStructure.house = house;
+                addressStructure.flat = flat;
 
-            AddressStructure addressStructure = new AddressStructure();
-            addressStructure.CorrectAddress = true;
-            addressStructure.index = index;
-            addressStructure.region = region;
-            addressStructure.area = area;
-            addressStructure.city = city;
-            addressStructure.street = street;
-            addressStructure.house = house;
-            addressStructure.flat = flat;
-
-            return CompileAddress(addressStructure);
+                return CompileAddress(addressStructure);
+            }
+            catch (Exception ex)
+            {
+                return ("При попытке собрать адрес из отдельных компонент возникло исключение "+ Convert.ToString(ex));
+            }
 
         }
 
 
-
-        ///
 
 
         public string Index(string s)
         {
-            string index = "";                              //ищем участок следующего вида: 
-            Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
-            index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
-            if (index == "") index = "Не удалось распознать индекс";
-            return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
+            try
+            {
+
+                string index = "";                              //ищем участок следующего вида: 
+                Regex regex1 = new Regex(@",(\s*\d+\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
+                index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
+                if (index == "") index = "Не удалось распознать индекс";
+                return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
+            }
+            catch (Exception ex)
+            {
+                return ("При попытке разобрать индекс возникло исключение " + Convert.ToString(ex));
+            }
         }
 
         public string Region(string s)
         {
-            string region = "";                                                             //разделено на 2 части:
-            Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+(?:кр|о|Кр)+[А-я]*\s*),");       //запятая, пробелы, название, признак кр/о, дополненный до конца, пробелы, запятая, окончание
-            Regex regex2 = new Regex(@",(\s*(?:кр|о|Кр)+[А-я]*\s+(?:[А-я]|-|\s)*)+\s*,");      //запятая, признак кр/о, дополенный до конца, пробел, название, пробелы, запятая, окончание
-            Regex regex3 = new Regex(@",(\s*(?:кр|о|Кр)(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,"); //запятая, признак кр/о, дополенный до конца из маленьких букв, Большая буква, окончание названия, запятая
-            region = MatchWithThreeRegex(regex1, regex2, regex3, s);                        //применяем 3 регулярных выражения
-            if (region == "") region = "Пермский край";                                     //если распознать регион не удалось- назначим регион по умолчанию
-            return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
+            try
+            {
+                string region = "";                                                             //разделено на 2 части:
+                Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+(?:кр|о|Кр)+[А-я]*\s*),");       //запятая, пробелы, название, признак кр/о, дополненный до конца, пробелы, запятая, окончание
+                Regex regex2 = new Regex(@",(\s*(?:кр|о|Кр)+[А-я]*\s+(?:[А-я]|-|\s)*)+\s*,");      //запятая, признак кр/о, дополенный до конца, пробел, название, пробелы, запятая, окончание
+                Regex regex3 = new Regex(@",(\s*(?:кр|о|Кр)(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,"); //запятая, признак кр/о, дополенный до конца из маленьких букв, Большая буква, окончание названия, запятая
+                region = MatchWithThreeRegex(regex1, regex2, regex3, s);                        //применяем 3 регулярных выражения
+                if (region == "") region = "Пермский край";                                     //если распознать регион не удалось- назначим регион по умолчанию
+                return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
+            }
+            catch (Exception ex)
+            {
+                return ("При попытке разобрать регион возникло исключение " + Convert.ToString(ex));
+            }
         }
 
         public string Area(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         {
-            string area = "";
-            Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+р[А-я]*\s*),");
-            Regex regex2 = new Regex(@",(\s*район[А-я]*\s+(?:[А-я]|-|\s)*)+\s*,");
-            Regex regex3 = new Regex(@",(\s*р(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,");
-            area = MatchWithThreeRegex(regex1, regex2, regex3, s);
-            return area.Trim();
+            try
+            {
+                string area = "";
+                Regex regex1 = new Regex(@",(\s*(?:[А-я]|-|\s)*\s+р[А-я]*\s*),");
+                Regex regex2 = new Regex(@",(\s*район[А-я]*\s+(?:[А-я]|-|\s)*)+\s*,");
+                Regex regex3 = new Regex(@",(\s*р(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,");
+                area = MatchWithThreeRegex(regex1, regex2, regex3, s);
+                return area.Trim();
+            }
+            catch (Exception ex)
+            {
+                return ("При попытке разобрать район возникло исключение " + Convert.ToString(ex));
+            }
         }
 
         public string City(string s)
