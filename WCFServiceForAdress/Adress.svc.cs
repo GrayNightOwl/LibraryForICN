@@ -224,25 +224,36 @@ namespace WCFServiceForAdress
             return addr.MatchWithOneRegex(regex1, s);
         }
 
+        //private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
+        //{
+        //    string result = "";
+        //    result = MatchWithOneRegex(regex1, s);
+        //    if (result == "")
+        //        result = MatchWithOneRegex(regex2, s);
+        //    return result;
+        //}
+
         private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
         {
-            string result = "";
-            result = MatchWithOneRegex(regex1, s);
-            if (result == "")
-                result = MatchWithOneRegex(regex2, s);
-            return result;
+            return addr.MatchWithTwoRegex(regex1,regex2, s);
         }
+
+        //private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
+        //{
+        //    string result = "";
+        //    result = MatchWithOneRegex(regex1, s);
+        //    if (result == "")
+        //        result = MatchWithOneRegex(regex2, s);
+        //    if (result == "")
+        //        result = MatchWithOneRegex(regex3, s);
+        //    return result;
+        //}
 
         private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
         {
-            string result = "";
-            result = MatchWithOneRegex(regex1, s);
-            if (result == "")
-                result = MatchWithOneRegex(regex2, s);
-            if (result == "")
-                result = MatchWithOneRegex(regex3, s);
-            return result;
+            return addr.MatchWithThreeRegex(regex1, regex2,regex3, s);
         }
+
 
     }
 }
