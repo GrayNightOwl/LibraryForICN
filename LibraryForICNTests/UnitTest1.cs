@@ -15,6 +15,8 @@ namespace LibraryForICNTests
             //вход
             string s = "  Приморский край ,  625000   , г.  Край ,  кв4 , дом 15,   улица 1-я Красноармейская   , ";
             string expected = "625000, Приморский край, г. Край, ул. 1-я Красноармейская, д. 15, кв. 4";
+
+
             //получаем значения
             Adress adress = new Adress();
             AdressStructure res = adress.ParseAdress(s);
