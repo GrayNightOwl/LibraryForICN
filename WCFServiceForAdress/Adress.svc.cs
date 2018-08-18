@@ -9,8 +9,6 @@ using System.Text.RegularExpressions;
 
 namespace WCFServiceForAdress
 {
-    // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде, SVC-файле и файле конфигурации.
-    // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
     public class Service1 : IntAddress
     {
 
@@ -66,33 +64,7 @@ namespace WCFServiceForAdress
             return mas;
         } //парсер адреса из строки, получает объект, преобразует в строку с помощью CompileAdress
 
-        //public AdressStructure ParseAddress(string s)
-        //{
-        //    AdressStructure result = new AdressStructure();
-        //    result.CorrectAddress = true; //изначально считаем адрес корректным
-        //    s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-        //    result.index = Index(s);     //может вернуть индекс по умолчанию
-        //    result.region = Region(s);   //может вернуть регион по умолчанию
-        //    result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
-        //    result.city = City(s);       //может вернуть город по умолчанию
-        //    result.street = Street(s);   //если не указано - вернуть ошибку
-        //    result.house = House(s);     //если не указано - вернуть ошибку
-        //    if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
-        //    {
-        //        result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
-        //        return result;
-        //    }
-        //    else
-        //        result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
-        //    return result;
-        //}
-
-
-
-
-
-
-
+        
         private string CompileAddress(AddressStructure adress)
         {
             string result = "";
