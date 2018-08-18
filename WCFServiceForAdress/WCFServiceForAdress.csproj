@@ -41,9 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LibraryForICN">
-      <HintPath>..\LibraryForICN\bin\Debug\LibraryForICN.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -75,7 +72,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <ProjectReference Include="..\LibraryForICNTests\LibraryForICNTests.csproj">
+      <Project>{ba67678d-3ec5-4e0b-b0b6-86bd2b826177}</Project>
+      <Name>LibraryForICNTests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryForICN\LibraryForICN.csproj">
+      <Project>{ddf9c5e9-3c60-46a1-89dc-b369c5c07053}</Project>
+      <Name>LibraryForICN</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -98,7 +104,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51177</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:12345/</IISUrl>
+          <IISUrl>http://localhost:51177/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
