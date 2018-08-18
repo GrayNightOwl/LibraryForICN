@@ -12,9 +12,9 @@ namespace WCFServiceForAdress
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде, SVC-файле и файле конфигурации.
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
-    public class Service1 : IntAdress
+    public class Service1 : IntAddress
     {
-        public string CompileAdress(AdressStructure adress)
+        public string CompileAddress(AdressStructure adress)
         {
             string result = "";
 
@@ -30,7 +30,7 @@ namespace WCFServiceForAdress
                 result = result + adress.area + ", ";
             }
             result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
-            if (adress.CorrectAdress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
+            if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
             {
                 result = result + "ул. " + adress.street + ", ";
                 result = result + "д. " + adress.house;
@@ -44,10 +44,10 @@ namespace WCFServiceForAdress
             return result;
         }
 
-        public AdressStructure ParseAdress(string s)
+        public AdressStructure ParseAddress(string s)
         {
             AdressStructure result = new AdressStructure();
-            result.CorrectAdress = true; //изначально считаем адрес корректным
+            result.CorrectAddress = true; //изначально считаем адрес корректным
             s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
             result.index = Index(s);     //может вернуть индекс по умолчанию
             result.region = Region(s);   //может вернуть регион по умолчанию
@@ -57,7 +57,7 @@ namespace WCFServiceForAdress
             result.house = House(s);     //если не указано - вернуть ошибку
             if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
             {
-                result.CorrectAdress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
+                result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
                 return result;
             }
             else
