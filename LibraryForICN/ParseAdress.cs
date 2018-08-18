@@ -149,14 +149,16 @@ namespace LibraryForICN
             try
             {
                 AddressStructure addressStructure = new AddressStructure();
-                if ((region == "") || (city == "") || (street == "") | (house == ""))
+                Regex regex1 = new Regex(@"([А-я])");
+                if ((region == "") || (city == "") || (street == "") || (house == "")|| (MatchWithOneRegex(regex1, index) != "")||(MatchWithOneRegex(regex1, flat) != ""))
                 {
+
                     addressStructure.CorrectAddress = false;
                 }
                 else
                 {
                     addressStructure.CorrectAddress = true;
-                    addressStructure.index = index;
+                    addressStructure.index = (MatchWithOneRegex(regex1, index));
                     addressStructure.region = region;
                     addressStructure.area = area;
                     addressStructure.city = city;
