@@ -38,21 +38,22 @@ namespace LibraryForICN
             try
             {
                 string result = "";
-
-                if (adress.index != "Не удалось распознать индекс")
-                {
-                    result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
-                }
-
-                result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
-
-                if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
-                {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
-                    result = result + adress.area + ", ";
-                }
-                result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
                 if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
                 {
+
+                    if (adress.index != "Не удалось распознать индекс")
+                    {
+                        result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
+                    }
+
+                    result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+
+                    if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
+                    {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
+                        result = result + adress.area + ", ";
+                    }
+                    result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
+
                     result = result + "ул. " + adress.street + ", ";
                     result = result + "д. " + adress.house;
                     if ((adress.flat != "Не удалось распознать квартиру") && (adress.flat != ""))
@@ -148,20 +149,26 @@ namespace LibraryForICN
             try
             {
                 AddressStructure addressStructure = new AddressStructure();
-                addressStructure.CorrectAddress = true;
-                addressStructure.index = index;
-                addressStructure.region = region;
-                addressStructure.area = area;
-                addressStructure.city = city;
-                addressStructure.street = street;
-                addressStructure.house = house;
-                addressStructure.flat = flat;
-
+                if ((region == "") || (city == "") || (street == "") | (house == ""))
+                {
+                    addressStructure.CorrectAddress = false;
+                }
+                else
+                {
+                    addressStructure.CorrectAddress = true;
+                    addressStructure.index = index;
+                    addressStructure.region = region;
+                    addressStructure.area = area;
+                    addressStructure.city = city;
+                    addressStructure.street = street;
+                    addressStructure.house = house;
+                    addressStructure.flat = flat;
+                }
                 return CompileAddress(addressStructure);
             }
             catch (Exception ex)
             {
-                return ("При попытке собрать адрес из отдельных компонент возникло исключение "+ Convert.ToString(ex));
+                return ("При попытке собрать адрес из отдельных компонент возникло исключение " + Convert.ToString(ex));
             }
 
         }
