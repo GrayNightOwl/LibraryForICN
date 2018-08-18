@@ -16,7 +16,8 @@ namespace WCFServiceForAdress
 
         
         public string CompileAddressFromSet(string index, string region, string area, string city, string street, string house, string flat)
-        {
+        {   //создаёт объект типа Адрес, передаёт в функцию сборки из объекта 
+
             AddressStructure addressStructure = new AddressStructure();
             addressStructure.CorrectAddress = true;
             addressStructure.index = index;
@@ -28,34 +29,8 @@ namespace WCFServiceForAdress
             addressStructure.flat = flat;
 
             return CompileAddress(addressStructure);
-              
-            //string result = "";
-
-            //if (adress.index != "Не удалось распознать индекс")
-            //{
-            //    result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
-            //}
-
-            //result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
-
-            //if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
-            //{                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
-            //    result = result + adress.area + ", ";
-            //}
-            //result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем без раздумий
-            //if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
-            //{
-            //    result = result + "ул. " + adress.street + ", ";
-            //    result = result + "д. " + adress.house;
-            //    if (adress.flat != "Не удалось распознать квартиру")
-            //    {
-            //        result = result + ", кв. " + adress.flat;
-            //    }
-            //}
-            //else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
-
-            //return result;
-        } //создаёт объект типа Адрес, передаёт в функцию сборки из объекта 
+            
+        } 
 
         public string[] ParseAddress(string s)
         {
