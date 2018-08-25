@@ -315,11 +315,11 @@ namespace LibraryForICN
         }
 
         /// <summary>
-        /// Метод, используемый для нахождения названия города в строке
+        /// Метод, используемый для нахождения названия области в строке
         /// Код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
         /// </summary>
         /// <param name="s">Строка с нечётким адресом</param>
-        /// <returns>Название города или "Пермь", в случае, если распознать город не удалось</returns>
+        /// <returns>Название района или пустая строка, если распознать район не удалось</returns>
         private string ParseArea(string s) 
         {
             try
@@ -338,10 +338,11 @@ namespace LibraryForICN
         }
 
         /// <summary>
-        /// 
+        /// Метод, используемый для нахождения названия города в строке
+        /// Код аналогичен предыдущему методу с заменой признака поиска на "г" - город, "дер" - деревня, "п"- посёлок
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Название города или "Пермь" в случае, если распознать город не удалось</returns>
         private string ParseCity(string s)
         {
             try
@@ -359,6 +360,12 @@ namespace LibraryForICN
             }
         }
 
+        /// <summary>
+        /// Метод, используемый для нахождения названия улицы в строке
+        /// Код аналогичен предыдущему с заменой признака поиска на "у" - улица
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Название улицы или строка с указанием о том, что улица не распознана</returns>
         private string ParseStreet(string s)
         {
             try
@@ -376,6 +383,12 @@ namespace LibraryForICN
             }
         }
 
+        /// <summary>
+        /// Метод, используемый для нахождения дома в строке
+        /// Код аналоигчен предыдущему, с заменой признака поиска на "д"- дом
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Номер дома или строка с указанием о том, что номер дома не распознан</returns>
         private string ParseHouse(string s)
         {
             try
@@ -393,6 +406,12 @@ namespace LibraryForICN
             }
         }
 
+        /// <summary>
+        /// Метод, используемый для нахождения номера квартиры в строке
+        /// Код аналогичен предыдущему с заменой признака поиска на "к" - квартира
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Номер квартиры или строка с указанием о том, что номер квартиры не распознан</returns>
         private string ParseFlat(string s)
         {
             try
@@ -409,8 +428,13 @@ namespace LibraryForICN
             }
         }
 
-
-        private string MatchWithOneRegex(Regex regex1, string s) //вынесенный метод применения одного регулярного выражения
+        /// <summary>
+        /// Вынесенный метод для применения одного регулярного выражения
+        /// </summary>
+        /// <param name="regex1">Регулярное выражение на входе</param>
+        /// <param name="s">Строка, к которой следует применить регулярное выражение</param>
+        /// <returns>Результат поиска</returns>
+        private string MatchWithOneRegex(Regex regex1, string s) 
         {
             try
             {
@@ -433,7 +457,14 @@ namespace LibraryForICN
             }
         }
 
-        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) //вынесенный метод применения двух регулярных выражений
+        /// <summary>
+        /// Вынесенный метод применения двух регулярных выражений
+        /// </summary>
+        /// <param name="regex1">Регулярное выражение 1 на входе</param>
+        /// <param name="regex2">Регулярное выражение 2 на входе</param>
+        /// <param name="s">Строка, к которой следует применить 2 регулярных выражения</param>
+        /// <returns>Результат поиска</returns>
+        private string MatchWithTwoRegex(Regex regex1, Regex regex2, string s) 
         {
             try
             {
@@ -449,7 +480,15 @@ namespace LibraryForICN
             }
         }
 
-        private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) //вынесенный метод применения двух регулярных выражений
+        /// <summary>
+        /// Вынесенный метод применения двух регулярных выражений
+        /// </summary>
+        /// <param name="regex1">Регулярное выражение 1 на входе</param>
+        /// <param name="regex2">Регулярное выражение 2 на входе</param>
+        /// <param name="regex3">Регулярное выражение 3 на входе</param>
+        /// <param name="s">Строка, к которой следует применить 3 регулярных выражения</param>
+        /// <returns>Результат поиска</returns>
+        private string MatchWithThreeRegex(Regex regex1, Regex regex2, Regex regex3, string s) 
         {
             try
             {

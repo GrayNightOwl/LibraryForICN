@@ -13,10 +13,19 @@ namespace WCFServiceForAdress
     [ServiceContract(Namespace = "AddressNS")]
     public interface IntAddress
     {
-        
+        /// <summary>
+        /// Описание метода, используемого для сборки адреса из объекта, полученного с помощью WCF
+        /// </summary>
+        /// <param name="address">Объект типа AddressTransfer, полученный с помощью WCF</param>
+        /// <returns>Собранная строка</returns>
         [OperationContract]
         string CompileAddress(AddressTransfer address);
 
+        /// <summary>
+        /// Описание метода, используемого для разборки нечётко заданного адреса
+        /// </summary>
+        /// <param name="s">Строка с нечётко заданным адресом</param>
+        /// <returns>Объект типа AddressTransfer, пригодный для передачи с помощью WCF</returns>
         [OperationContract]
         AddressTransfer ParseAddress(string s);
 
@@ -24,10 +33,17 @@ namespace WCFServiceForAdress
     }
 
 
-
+    /// <summary>
+    /// Соглашение о классе AddressTranfser
+    /// </summary>
     [DataContract]
     public class AddressTransfer
     {
+        /// <summary>
+        /// Метод, преобразующий класс AddressTransfer (передача WCF) в класс AdressStructure, работа с которым идёт в библиотеке
+        /// Содержит проверку на пустоту квартиры и улицы, так как именно этот набор является минимально допустимым
+        /// </summary>
+        /// <returns>объект типа AddressStructure, работа с которым потом пойдёт методами из библиотеки</returns>
         public AddressStructure ConvertToAddressStructure()
         {
             AddressStructure temp = new AddressStructure();
@@ -49,8 +65,12 @@ namespace WCFServiceForAdress
             return temp;
         }
 
+
+        /// <summary>
+        /// Далее следуют соглашения о полях, передаваемых с помощью WCF
+        /// </summary>
         [DataMember]
-        public string index; //сделать их свойствами?
+        public string index;
 
         [DataMember]
         public string region;
@@ -73,10 +93,9 @@ namespace WCFServiceForAdress
         [DataMember]
         public string error;
 
-
-
-        // This is not serialized because the DataMemberAttribute 
-        // has not been applied.
+        /// <summary>
+        /// Метод, который не передаётся при взаимодействии с помощью WCF
+        /// </summary>
         public bool CorrectAddress;
 
     }
