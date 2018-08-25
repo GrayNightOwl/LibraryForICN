@@ -6,52 +6,45 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using LibraryForICN;
 
-/*
- Для запуска программы следует сначала собрать проект LibraryForICN, затем собрать оставшиеся два проекта: LibraryForICNTests, WCFServiceAdress
-Далее следует запустить WCFServiceAdress на отладку/выполнение,подключиться с помощью программы SoapUI к странице проекта на IIS. 
-Затем открыть с помощью SoapUI файл "TestForLibrary-soapui-project.xml" и провести необходимые тесты.
-Модульные тесты библиотеки следует выполнять с помощью файла UnitTest1.cs в проекте LibraryForICNTest.
- */
+/// <summary>
+/// Для запуска программы следует сначала собрать проект LibraryForICN, затем собрать оставшиеся два проекта: LibraryForICNTests, WCFServiceAdress
+/// Далее следует запустить WCFServiceAdress на отладку/выполнение,подключиться с помощью программы SoapUI к странице проекта на IIS.
+///Затем открыть с помощью SoapUI файл "TestForLibrary-soapui-project.xml" и провести необходимые тесты.
+///Модульные тесты библиотеки следует выполнять с помощью файла UnitTest1.cs в проекте LibraryForICNTest.
+/// </summary>
+
 
 
 
 namespace LibraryForICN
 {
-    /* Найденные ошибки и планы:
-     * 
-     * решить проблему с подключением библиотеки, возможно использовать относительный адрес и динамическое подключение библиотек?
-     * 
-     * посёлок распознаётся корректно, но в результате указывается как "город" - нет признака, посёлок это, деревня или город
-     * 
-     * фраза "город Край" трактуется и как название края, и как название города
-     * 
-     * "городской район", "гомельский район" и т.д. распознаётся как город "район" из-за признака "г" в регулярных выражениях.
-     * исчезает при установке сначала города, а потом района. Возможное решение для часто встречающихся случаев- смотреть справа налево
-     * Также для решения можно смотреть район, затем исключать эту строку из дальнейшего рассмотрения регулярными выражениями
-     * 
-     * Для каждого действия возвращать числовой (например?) код операции, а объект для изменения передавать по ссылке
-     * 
-     * Сделать предкомпилированные регулярные выражения для повышения скорости работы
-     * 
-     * Сделать логирование ошибок сервиса или действий пользователя вообще
-     */
+    /// <summary>
+    /// Найденные ошибки и планы:
+    /// 
+    /// В свойствах класса AddressStructure необходимо добавить следующие проверки:
+    /// Свойства, использующиеся для доступа к полям
+    /// на содержание в индексе- только цифр
+    /// на содержание в регионе, области, городе, улице- хоть каких-то букв
+    /// на содержание в доме, квартире- хоть каких-то цифр
+    /// 
+    /// посёлок распознаётся корректно, но в результате указывается как "город" - нет признака, посёлок это, деревня или город
+    /// фраза "город Край" трактуется и как название края, и как название города
+    /// 
+    /// "городской район", "гомельский район" и т.д. распознаётся как город "район" из-за признака "г" в регулярных выражениях.
+    /// исчезает при установке сначала города, а потом района. Возможное решение для часто встречающихся случаев- смотреть справа налево
+    /// Также для решения можно смотреть район, затем исключать эту строку из дальнейшего рассмотрения регулярными выражениями
+    /// 
+    /// </summary>
 
     public class AddressStructure
     {
-        const string IndexError = "Не удалось распознать индекс";
-        const string StreetError = "Не удалось распознать улицу";
-        const string HouseError = "Не удалось распознать дом";
-        const string FlatError = "Не удалось распознать квартиру";
 
-
-        const string IndexException = "При попытке разобрать индекс возникло исключение ";
-        const string RegionException = "При попытке разобрать регион возникло исключение ";
-        const string AreaException = "При попытке разобрать район возникло исключение ";
-        const string CityException = "При попытке разобрать населённый пункт возникло исключение ";
-        const string StreetException = "При попытке разобрать улицу возникло исключение ";
-        const string HouseException = "При попытке разобрать дом возникло исключение ";
-        const string FlatException = "При попытке разобрать квартиру возникло исключение ";
-
+        /// <summary>
+        /// Конструктор, принимающий на вход строку с нечётким адресом и "разбирающий" её на части. 
+        /// Части адреса сразу же записываются в соответствующие поля экземпляра класса
+        /// Здесь же содержится обработчик исключений, который следует вынести в отдельную функцию
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
         public AddressStructure(string s)
         {
             try
@@ -78,55 +71,58 @@ namespace LibraryForICN
             }
         }
 
-        public AddressStructure() { }
-
+        /// <summary>
+        /// Метод, собирающий адрес из отдельных полей экземпляра класса AddressStructure. 
+        /// Содержит обработчик исключений, который также следует вынести в отдельную функцию
+        /// </summary>
+        /// <returns>Собранный в строку адрес</returns>
         public string CompileAddress()
         {
             try
             {
-                string result = "";
+                StringBuilder result = new StringBuilder("",150);
                 if (this.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
                 {
 
                     if ((this.Index != IndexError) || (this.Index != ""))
                     {
-                        result = result + this.Index + ", ";  //индекс не назначается по умолчанию, опустим его
+                        result.Append(this.Index + ", ");  //индекс не назначается по умолчанию, опустим его
                     }
 
                     if (this.Region == "")
                     {
-                        result = result + "Пермский край, ";
+                        result.Append("Пермский край, ");
                     }
                     else
                     {
-                        result = result + this.Region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+                        result.Append( this.Region + ", "); //регион назначается по умолчанию, можно прибавлять и ставить запятую
                     }
 
                     if (this.Area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
                     {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
-                        result = result + this.Area + ", ";
+                        result.Append(this.Area + ", ");
                     }
 
                     if (this.City == "")
                     {
-                        result = result + "г. Пермь, "; //город назначается по умолчанию, добавляем
+                        result.Append("г. Пермь, "); //город назначается по умолчанию, добавляем
                     }
                     else
                     {
-                        result = result + "г. " + this.City + ", "; //город назначается по умолчанию, добавляем
+                        result.Append("г. " + this.City + ", "); //город назначается по умолчанию, добавляем
                     }
 
 
-                    result = result + "ул. " + this.Street + ", ";
-                    result = result + "д. " + this.House;
+                    result.Append("ул. " + this.Street + ", ");
+                    result.Append("д. " + this.House);
                     if ((this.Flat != FlatError) && (this.Flat != ""))
                     {
-                        result = result + ", кв. " + this.Flat;
+                        result.Append(", кв. " + this.Flat);
                     }
                 }
-                else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
+                else { result.Append("Некорректный адрес"); }; //иначе вернём ошибку распознавания
 
-                return result;
+                return result.ToString();
             }
             catch (Exception ex)
             {
@@ -135,6 +131,29 @@ namespace LibraryForICN
         }
 
 
+
+
+        public AddressStructure() { }
+
+        /// <remarks>
+        /// Скрытые поля класса
+        /// </remarks>
+        private bool correctAddress;
+        private string index;
+        private string region;
+        private string area;
+        private string city;
+        private string street;
+        private string house;
+        private string flat;
+        private string error;
+
+        /// <remarks>
+        /// Свойства, использующиеся для доступа к полям
+        /// На данный момент не успеваю это сделать, но в описании свойства необходимо добавить проверку на содержание в индексе- только цифр
+        /// на содержание в регионе, области, городе, улице- хоть каких-то букв
+        /// на содержание в доме, квартире- хоть каких-то цифр
+        /// </remarks>
         public bool CorrectAddress
         {
             get
@@ -146,7 +165,6 @@ namespace LibraryForICN
                 correctAddress = value;
             }
         }
-
         public string Index
         {
             get
@@ -158,7 +176,6 @@ namespace LibraryForICN
                 index = value;
             }
         }
-
         public string Region
         {
             get
@@ -170,7 +187,6 @@ namespace LibraryForICN
                 region = value;
             }
         }
-
         public string Area
         {
             get
@@ -182,7 +198,6 @@ namespace LibraryForICN
                 area = value;
             }
         }
-
         public string City
         {
             get
@@ -194,7 +209,6 @@ namespace LibraryForICN
                 city = value;
             }
         }
-
         public string Street
         {
             get
@@ -206,7 +220,6 @@ namespace LibraryForICN
                 street = value;
             }
         }
-
         public string House
         {
             get
@@ -218,7 +231,6 @@ namespace LibraryForICN
                 house = value;
             }
         }
-
         public string Flat
         {
             get
@@ -230,7 +242,6 @@ namespace LibraryForICN
                 flat = value;
             }
         }
-
         public string Error
         {
             get
@@ -243,31 +254,36 @@ namespace LibraryForICN
             }
         }
 
+        /// <remarks>
+        /// Далее следуют строковые константы, отвечающие за отображение ошибок и исключений при распознавании частей адреса
+        /// </remarks>
+        const string IndexError = "Не удалось распознать индекс";
+        const string StreetError = "Не удалось распознать улицу";
+        const string HouseError = "Не удалось распознать дом";
+        const string FlatError = "Не удалось распознать квартиру";
+        
+        const string IndexException = "При попытке разобрать индекс возникло исключение ";
+        const string RegionException = "При попытке разобрать регион возникло исключение ";
+        const string AreaException = "При попытке разобрать район возникло исключение ";
+        const string CityException = "При попытке разобрать населённый пункт возникло исключение ";
+        const string StreetException = "При попытке разобрать улицу возникло исключение ";
+        const string HouseException = "При попытке разобрать дом возникло исключение ";
+        const string FlatException = "При попытке разобрать квартиру возникло исключение ";
 
-
-        private bool correctAddress;
-        private string index;
-        private string region;
-        private string area;
-        private string city;
-        private string street;
-        private string house;
-        private string flat;
-        private string error;
-
+        /// <summary>
+        /// Метод, используемый для нахождения индекса в строке.
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Распознанный индекс или пустая строка в случае, если индекс распознать не удалось</returns>
         private string ParseIndex(string s)
         {
             try
             {
-
                 string index = "";                              //ищем участок следующего вида: 
                 Regex regex1 = new Regex(@",(\s*\d{6}\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
                 index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
                 if (index == "") index = IndexError;
                 return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
-
-
-                
             }
             catch (Exception ex)
             {
@@ -275,6 +291,11 @@ namespace LibraryForICN
             }
         }
 
+        /// <summary>
+        /// Метод, используемый для нахождения названия региона в строке
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Название региона или "Пермский край" в случае, если распознать регион не удалось</returns>
         private string ParseRegion(string s)
         {
             try
@@ -284,7 +305,7 @@ namespace LibraryForICN
                 Regex regex2 = new Regex(@",(\s*(?:кр|о|Кр)+[А-я]*\s+(?:[А-я]|-|\s)*)+\s*,");      //запятая, признак кр/о, дополенный до конца, пробел, название, пробелы, запятая, окончание
                 Regex regex3 = new Regex(@",(\s*(?:кр|о|Кр)(?:[а-я]|-)*\s*[А-Я](?:[А-я]|-|\s)+)\s*,"); //запятая, признак кр/о, дополенный до конца из маленьких букв, Большая буква, окончание названия, запятая
                 region = MatchWithThreeRegex(regex1, regex2, regex3, s);                        //применяем 3 регулярных выражения
-                if (region == "") region = "Пермский край";                                     //если распознать регион не удалось- назначим регион по умолчанию
+                if (region == "") region = "Пермский край";                                     
                 return region.Trim();                                                           //вернём значение, лишённое пробелов с левой и правой стороны
             }
             catch (Exception ex)
@@ -293,7 +314,13 @@ namespace LibraryForICN
             }
         }
 
-        private string ParseArea(string s) //код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
+        /// <summary>
+        /// Метод, используемый для нахождения названия города в строке
+        /// Код аналогичен распознаванию региона, признак кр/о (край/область) заменён на "р" от "район"
+        /// </summary>
+        /// <param name="s">Строка с нечётким адресом</param>
+        /// <returns>Название города или "Пермь", в случае, если распознать город не удалось</returns>
+        private string ParseArea(string s) 
         {
             try
             {
@@ -310,6 +337,11 @@ namespace LibraryForICN
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         private string ParseCity(string s)
         {
             try
