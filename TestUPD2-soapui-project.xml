@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2c53cbab-f7a8-48bc-961f-42e053530abd" activeEnvironment="Default" name="TestUPD2" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="9c890bf7-8f76-4121-a839-dce2e170d5ff" wsaVersion="NONE" name="BasicHttpBinding_IntAddress" type="wsdl" bindingName="{AddressNS}BasicHttpBinding_IntAddress" soapVersion="1_1" anonymous="optional" definition="http://localhost:12345/Adress.svc?singleWsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:12345/Adress.svc?singleWsdl"><con:part><con:url>http://localhost:12345/Adress.svc?singleWsdl</con:url><con:content><![CDATA[<wsdl:definitions name="Service1" targetNamespace="AddressNS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="AddressNS" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="AddressNS" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/WCFServiceForAdress"/>
+      <xs:element name="CompileAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="address" nillable="true" type="q1:AddressTransfer" xmlns:q1="http://schemas.datacontract.org/2004/07/WCFServiceForAdress"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CompileAddressResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CompileAddressResult" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ParseAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="s" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ParseAddressResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ParseAddressResult" nillable="true" type="q2:AddressTransfer" xmlns:q2="http://schemas.datacontract.org/2004/07/WCFServiceForAdress"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFServiceForAdress" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/WCFServiceForAdress">
+      <xs:complexType name="AddressTransfer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="area" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="city" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="error" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="flat" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="house" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="index" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="region" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="street" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="AddressTransfer" nillable="true" type="tns:AddressTransfer"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IntAddress_CompileAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompileAddress"/>
+  </wsdl:message>
+  <wsdl:message name="IntAddress_CompileAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompileAddressResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IntAddress_ParseAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParseAddress"/>
+  </wsdl:message>
+  <wsdl:message name="IntAddress_ParseAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParseAddressResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IntAddress">
+    <wsdl:operation name="CompileAddress">
+      <wsdl:input wsaw:Action="AddressNS/IntAddress/CompileAddress" message="tns:IntAddress_CompileAddress_InputMessage"/>
+      <wsdl:output wsaw:Action="AddressNS/IntAddress/CompileAddressResponse" message="tns:IntAddress_CompileAddress_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ParseAddress">
+      <wsdl:input wsaw:Action="AddressNS/IntAddress/ParseAddress" message="tns:IntAddress_ParseAddress_InputMessage"/>
+      <wsdl:output wsaw:Action="AddressNS/IntAddress/ParseAddressResponse" message="tns:IntAddress_ParseAddress_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IntAddress" type="tns:IntAddress">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CompileAddress">
+      <soap:operation soapAction="AddressNS/IntAddress/CompileAddress" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParseAddress">
+      <soap:operation soapAction="AddressNS/IntAddress/ParseAddress" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IntAddress" binding="tns:BasicHttpBinding_IntAddress">
+      <soap:address location="http://localhost:12345/Adress.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint></con:endpoints><con:operation id="f6d0ccf7-fbcf-462f-a4c3-c4fac82fb9fe" isOneWay="false" action="AddressNS/IntAddress/CompileAddress" name="CompileAddress" bindingOperationName="CompileAddress" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4b7f8b4c-5f66-44bf-b855-c9c92a74397f" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS" xmlns:wcf="http://schemas.datacontract.org/2004/07/WCFServiceForAdress">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddress>\r
+         <!--Optional:-->\r
+         <add:address>\r
+            <!--Optional:-->\r
+            <wcf:area>ыва область</wcf:area>\r
+            <!--Optional:-->\r
+            <wcf:city>ыва</wcf:city>\r
+            <!--Optional:-->\r
+            <wcf:error></wcf:error>\r
+            <!--Optional:-->\r
+            <wcf:flat>ыва</wcf:flat>\r
+            <!--Optional:-->\r
+            <wcf:house>ыва</wcf:house>\r
+            <!--Optional:-->\r
+            <wcf:index>ыва</wcf:index>\r
+            <!--Optional:-->\r
+            <wcf:region>ыва край</wcf:region>\r
+            <!--Optional:-->\r
+            <wcf:street>ываала</wcf:street>\r
+         </add:address>\r
+      </add:CompileAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddress"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="0b9a7467-0b1f-45df-b880-01f9cb92f955" isOneWay="false" action="AddressNS/IntAddress/ParseAddress" name="ParseAddress" bindingOperationName="ParseAddress" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a46ca4bf-ac88-4682-9212-d89ca05aa5c6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>  614825 , Еврейская Автономная область, городской район, город 13-й километр , улица Степана Разина вторая , дом 115Б/1, квартира 12 </add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="3beb981f-ab5e-4437-bd4d-458e10135ebb" name="TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="71dd9c56-aa99-4a3e-9d7f-828196390cf2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="c95814ca-4337-4888-835a-1242194594b2" name="CompileAddress - CorrectAddress"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddress</con:operation><con:request name="CompileAddress - CorrectAddress" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="ad1db928-1a13-4ba2-9f49-950180c426de"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS" xmlns:wcf="http://schemas.datacontract.org/2004/07/WCFServiceForAdress">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddress>\r
+         <!--Optional:-->\r
+         <add:address>\r
+            <!--Optional:-->\r
+            <wcf:area></wcf:area>\r
+            <!--Optional:-->\r
+            <wcf:city>Пермь</wcf:city>\r
+            <!--Optional:-->\r
+            <wcf:error></wcf:error>\r
+            <!--Optional:-->\r
+            <wcf:flat>44</wcf:flat>\r
+            <!--Optional:-->\r
+            <wcf:house>25</wcf:house>\r
+            <!--Optional:-->\r
+            <wcf:index>614000</wcf:index>\r
+            <!--Optional:-->\r
+            <wcf:region>Пермский край</wcf:region>\r
+            <!--Optional:-->\r
+            <wcf:street>Белява</wcf:street>\r
+         </add:address>\r
+      </add:CompileAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="5cefc289-80aa-4b26-96aa-1199cff56106" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="55698710-4b19-4f39-87e8-54cf68df5243" name="CompileAddress -Correct Address, two words in street"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>CompileAddress</con:operation><con:request name="CompileAddress -Correct Address, two words in street" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="49c7b71e-1929-4163-840e-37e272cca642"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS" xmlns:wcf="http://schemas.datacontract.org/2004/07/WCFServiceForAdress">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:CompileAddress>\r
+         <!--Optional:-->\r
+         <add:address>\r
+            <!--Optional:-->\r
+            <wcf:area>Ивановская область</wcf:area>\r
+            <!--Optional:-->\r
+            <wcf:city>Иваново</wcf:city>\r
+            <!--Optional:-->\r
+            <wcf:error></wcf:error>\r
+            <!--Optional:-->\r
+            <wcf:flat>32</wcf:flat>\r
+            <!--Optional:-->\r
+            <wcf:house>25</wcf:house>\r
+            <!--Optional:-->\r
+            <wcf:index>614000</wcf:index>\r
+            <!--Optional:-->\r
+            <wcf:region>Пермский край</wcf:region>\r
+            <!--Optional:-->\r
+            <wcf:street>Галиаскара Камала</wcf:street>\r
+         </add:address>\r
+      </add:CompileAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="0a9b482f-582d-4a65-a3ee-522646c6296c" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="44e60a06-7534-4d09-8767-2a6abe96392a" name="ParseAddress - CorrectAddress, Correct Result"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - CorrectAddress, Correct Result" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="35cd80f3-733d-4bf7-b30f-d256eed20689"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>Приморский край, Ленинск, ул. Советская, д. 45, кв. 18</add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="f9e05cf1-4b95-4756-a0d4-13aba6b21991" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="9b688ba0-75ef-45a1-9fbd-20e95e4ed7d0" name="ParseAddress - CorrectAddress"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - CorrectAddress" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="0f345144-2f31-4c4e-a36e-d4030183e6ec"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>614000, д. 70Б,улГагарина бульвар, край Пермский ,  гор  Пермь </add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="fa5786e1-8be3-403c-91dd-02063399c17f" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="82659fbc-7b33-44d4-ae01-8a13df529c56" name="ParseAddress - CorrectResult, DifficultAddress"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - CorrectResult, DifficultAddress" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="378a2804-b2c4-4477-8040-58453051c8be"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s> 614825 , Еврейская Автономная область, Спасо Преображенский район, город Арзамас-13 , улица Степана Разина вторая , дом 115/1, квартира 12  </add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="32518078-31fe-4cdc-8764-7842dc580a74" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="a0883357-cccc-4dd4-a310-034d8392b9d6" name="ParseAddress - ErrorResult"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BasicHttpBinding_IntAddress</con:interface><con:operation>ParseAddress</con:operation><con:request name="ParseAddress - ErrorResult" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="29a29333-5b8b-4bf6-b028-fb7fe4d98943"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <add:ParseAddress>\r
+         <!--Optional:-->\r
+         <add:s>  614825 , Еврейская Автономная область, городской район, город 13-й километр , улица Степана Разина вторая , дом 115Б/1, квартира 12 </add:s>\r
+      </add:ParseAddress>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="c4c27b77-1eed-47bb-a0b3-4310e02cb119" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/ParseAddress"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

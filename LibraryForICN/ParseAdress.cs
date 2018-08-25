@@ -9,7 +9,7 @@ using LibraryForICN;
 /// <summary>
 /// Для запуска программы следует сначала собрать проект LibraryForICN, затем собрать оставшиеся два проекта: LibraryForICNTests, WCFServiceAdress
 /// Далее следует запустить WCFServiceAdress на отладку/выполнение,подключиться с помощью программы SoapUI к странице проекта на IIS.
-///Затем открыть с помощью SoapUI файл "TestForLibrary-soapui-project.xml" и провести необходимые тесты.
+///Затем открыть с помощью SoapUI файл "TestUPD2-soapui-project.xml" и провести необходимые тесты.
 ///Модульные тесты библиотеки следует выполнять с помощью файла UnitTest1.cs в проекте LibraryForICNTest.
 /// </summary>
 
