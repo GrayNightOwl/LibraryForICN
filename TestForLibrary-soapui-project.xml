@@ -151,9 +151,9 @@
          <!--Optional:-->
          <add:street>бульвар Гагарина</add:street>
          <!--Optional:-->
-         <add:house>ав</add:house>
+         <add:house>15</add:house>
          <!--Optional:-->
-         <add:flat>'n'</add:flat>
+         <add:flat>15</add:flat>
       </add:CompileAddressFromSet>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="AddressNS/IntAddress/CompileAddressFromSet"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4e1f17c4-c87e-4338-93b1-90eae3f8621d" isOneWay="false" action="AddressNS/IntAddress/ParseAddress" name="ParseAddress" bindingOperationName="ParseAddress" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4d7efbc6-49b4-467d-820c-f00a62c8fc06" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:12345/Adress.svc</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:add="AddressNS">\r
