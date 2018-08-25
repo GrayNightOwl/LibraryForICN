@@ -1,0 +1,10 @@
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\bin\WCFServiceForAdress.dll.config
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\bin\WCFServiceForAdress.dll
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\bin\WCFServiceForAdress.pdb
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\bin\LibraryForICN.dll
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\bin\LibraryForICN.pdb
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\obj\Debug\WCFServiceForAdress.csproj.CoreCompileInputs.cache
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\obj\Debug\WCFServiceForAdress.csproj.CopyComplete
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\obj\Debug\WCFServiceForAdress.dll
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\obj\Debug\WCFServiceForAdress.pdb
+C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\obj\Debug\WCFServiceForAdress.csprojAssemblyReference.cache

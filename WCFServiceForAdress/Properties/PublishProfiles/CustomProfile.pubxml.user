@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Этот файл используется процессом публикации или упаковки вашего веб-проекта. Можно настроить поведение этого процесса,
+изменив этот файл MSBuild. Подробности см. на странице https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Администратор\source\repos\LibraryForICN\WCFServiceForAdress\Published</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Adress.svc">
+      <publishTime>08/18/2018 17:08:38</publishTime>
+    </File>
+    <File Include="bin/LibraryForICN.dll">
+      <publishTime>08/18/2018 19:22:56</publishTime>
+    </File>
+    <File Include="bin/LibraryForICN.pdb">
+      <publishTime>08/18/2018 19:22:56</publishTime>
+    </File>
+    <File Include="bin/LibraryForICNTests.dll">
+      <publishTime>08/18/2018 19:22:56</publishTime>
+    </File>
+    <File Include="bin/LibraryForICNTests.pdb">
+      <publishTime>08/18/2018 19:22:56</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll">
+      <publishTime>04/03/2018 01:45:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll">
+      <publishTime>04/03/2018 01:45:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll">
+      <publishTime>04/03/2018 01:45:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.TestPlatform.TestFramework.dll">
+      <publishTime>04/03/2018 01:45:02</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll">
+      <publishTime>04/03/2018 01:45:00</publishTime>
+    </File>
+    <File Include="bin/WCFServiceForAdress.dll">
+      <publishTime>08/18/2018 19:22:57</publishTime>
+    </File>
+    <File Include="bin/WCFServiceForAdress.pdb">
+      <publishTime>08/18/2018 19:22:57</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/18/2018 19:22:57</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
