@@ -37,14 +37,112 @@ namespace LibraryForICN
 
     public class AddressStructure //Данный класс существует в качестве структуры данных, хранящей адрес, используется для сборки и разборки адреса
     {
-        public bool CorrectAddress; //признаки корректности адреса, устанавливается в "false" в случае отстутствия названия улицы или номера дома
-        public string index;
-        public string region;
-        public string area;
-        public string city;
-        public string street;
-        public string house;
-        public string flat;
+        private bool correctAddress;
+        private string index;
+        private string region;
+        private string area;
+        private string city;
+        private string street;
+        private string house;
+        private string flat;
+
+        public bool CorrectAddress
+        {
+            get
+            {
+                return correctAddress;
+            }
+            set
+            {
+                correctAddress = value;
+            }
+        }
+
+        public string Index
+        {
+            get
+            {
+                return index;
+            }
+            set
+            {
+                index = value;
+            }
+        }
+
+        public string Region
+        {
+            get
+            {
+                return region;
+            }
+            set
+            {
+                region = value;
+            }
+        }
+
+        public string Area
+        {
+            get
+            {
+                return area;
+            }
+            set
+            {
+                area = value;
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                return city;
+            }
+            set
+            {
+                city = value;
+            }
+        }
+
+        public string Street
+        {
+            get
+            {
+                return street;
+            }
+            set
+            {
+                street = value;
+            }
+        }
+
+        public string House
+        {
+            get
+            {
+                return house;
+            }
+            set
+            {
+                house = value;
+            }
+        }
+
+        public string Flat
+        {
+            get
+            {
+                return flat;
+            }
+            set
+            {
+                flat = value;
+            }
+        }
+
+
     }
 
     public class AdressFromLIB
@@ -57,40 +155,40 @@ namespace LibraryForICN
                 if (adress.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
                 {
 
-                    if ((adress.index != "Не удалось распознать индекс")||(adress.index !=""))
+                    if ((adress.Index != "Не удалось распознать индекс")||(adress.Index !=""))
                     {
-                        result = result + adress.index + ", ";  //индекс не назначается по умолчанию, опустим его
+                        result = result + adress.Index + ", ";  //индекс не назначается по умолчанию, опустим его
                     }
 
-                    if (adress.region == "")
+                    if (adress.Region == "")
                     {
                         result = result + "Пермский край, ";
                     }
                     else
                     {
-                        result = result + adress.region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
+                        result = result + adress.Region + ", "; //регион назначается по умолчанию, можно прибавлять и ставить запятую
                     }
 
-                    if (adress.area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
+                    if (adress.Area != "") //данная проверка необходима, чтобы добавлять запятую только в необходимых случаях
                     {                       //значение по умолчанию для района не ставится, нужно иметь городские и сельские адреса
-                        result = result + adress.area + ", ";
+                        result = result + adress.Area + ", ";
                     }
 
-                    if (adress.city == "")
+                    if (adress.City == "")
                     {
                         result = result + "г. Пермь, "; //город назначается по умолчанию, добавляем
                     }
                     else
                     {
-                        result = result + "г. " + adress.city + ", "; //город назначается по умолчанию, добавляем
+                        result = result + "г. " + adress.City + ", "; //город назначается по умолчанию, добавляем
                     }
 
                     
-                    result = result + "ул. " + adress.street + ", ";
-                    result = result + "д. " + adress.house;
-                    if ((adress.flat != "Не удалось распознать квартиру") && (adress.flat != ""))
+                    result = result + "ул. " + adress.Street + ", ";
+                    result = result + "д. " + adress.House;
+                    if ((adress.Flat != "Не удалось распознать квартиру") && (adress.Flat != ""))
                     {
-                        result = result + ", кв. " + adress.flat;
+                        result = result + ", кв. " + adress.Flat;
                     }
                 }
                 else { result = "Некорректный адрес"; }; //иначе вернём ошибку распознавания
@@ -110,26 +208,26 @@ namespace LibraryForICN
                 AddressStructure result = new AddressStructure();
                 result.CorrectAddress = true; //изначально считаем адрес корректным
                 s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-                result.index = Index(s);     //может вернуть индекс по умолчанию
-                result.region = Region(s);   //может вернуть регион по умолчанию
-                result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
-                result.city = City(s);       //может вернуть город по умолчанию
-                result.street = Street(s);   //если не указано - вернуть ошибку
-                result.house = House(s);     //если не указано - вернуть ошибку
-                if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+                result.Index = Index(s);     //может вернуть индекс по умолчанию
+                result.Region = Region(s);   //может вернуть регион по умолчанию
+                result.Area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+                result.City = City(s);       //может вернуть город по умолчанию
+                result.Street = Street(s);   //если не указано - вернуть ошибку
+                result.House = House(s);     //если не указано - вернуть ошибку
+                if ((result.Street == "Не удалось распознать улицу") || (result.House == "Не удалось распознать дом"))
                 {
                     result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
                     return result;
                 }
                 else
-                    result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
+                    result.Flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
                 return result;
             }
             catch (Exception ex)
             {
                 AddressStructure faultResult = new AddressStructure(); //создаём новый объект
                 faultResult.CorrectAddress = false; //считаем его ошибочным
-                faultResult.region = "При разборке адреса возникло исключение "+ Convert.ToString(ex);
+                faultResult.Region = "При разборке адреса возникло исключение "+ Convert.ToString(ex);
                 return faultResult;
             }
         } //парсер адреса из строки, получает объект, преобразует в AddressStructure
@@ -142,13 +240,13 @@ namespace LibraryForICN
                 AddressStructure result = new AddressStructure();
                 result.CorrectAddress = true; //изначально считаем адрес корректным
                 s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-                result.index = Index(s);     //может вернуть индекс по умолчанию
-                result.region = Region(s);   //может вернуть регион по умолчанию
-                result.area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
-                result.city = City(s);       //может вернуть город по умолчанию
-                result.street = Street(s);   //если не указано - вернуть ошибку
-                result.house = House(s);     //если не указано - вернуть ошибку
-                if ((result.street == "Не удалось распознать улицу") || (result.house == "Не удалось распознать дом"))
+                result.Index = Index(s);     //может вернуть индекс по умолчанию
+                result.Region = Region(s);   //может вернуть регион по умолчанию
+                result.Area = Area(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
+                result.City = City(s);       //может вернуть город по умолчанию
+                result.Street = Street(s);   //если не указано - вернуть ошибку
+                result.House = House(s);     //если не указано - вернуть ошибку
+                if ((result.Street == "Не удалось распознать улицу") || (result.House == "Не удалось распознать дом"))
                 {
                     result.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
                                                    //return CompileAddress(result);
@@ -156,16 +254,16 @@ namespace LibraryForICN
                 else
 
                 {
-                    result.flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
-                    mas[6] = result.flat;
+                    result.Flat = Flat(s);   //не вернёт значение по умолчанию, но адрес может существовать и без квартиры
+                    mas[6] = result.Flat;
                 }
                 //return CompileAddress(result);
-                mas[0] = result.index;
-                mas[1] = result.region;
-                mas[2] = result.area;
-                mas[3] = result.city;
-                mas[4] = result.street;
-                mas[5] = result.house;
+                mas[0] = result.Index;
+                mas[1] = result.Region;
+                mas[2] = result.Area;
+                mas[3] = result.City;
+                mas[4] = result.Street;
+                mas[5] = result.House;
                 return mas;
             }
             catch (Exception ex)
@@ -191,13 +289,13 @@ namespace LibraryForICN
                 else
                 {
                     addressStructure.CorrectAddress = true;
-                    addressStructure.index = index;
-                    addressStructure.region = region;
-                    addressStructure.area = area;
-                    addressStructure.city = city;
-                    addressStructure.street = street;
-                    addressStructure.house = house;
-                    addressStructure.flat = flat;
+                    addressStructure.Index = index;
+                    addressStructure.Region = region;
+                    addressStructure.Area = area;
+                    addressStructure.City = city;
+                    addressStructure.Street = street;
+                    addressStructure.House = house;
+                    addressStructure.Flat = flat;
                 }
                 return CompileAddress(addressStructure);
             }
