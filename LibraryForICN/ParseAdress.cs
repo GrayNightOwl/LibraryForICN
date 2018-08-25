@@ -37,7 +37,18 @@ namespace LibraryForICN
      */
 
     public class AddressStructure
-    { 
+    {
+        const string IndexError = "Не удалось распознать индекс";
+        const string RegionError = "";
+        const string AreaError = "";
+        const string CityError = "";
+        const string StreetError = "Не удалось распознать улицу";
+        const string HouseError = "Не удалось распознать дом";
+        const string FlatError = "Не удалось распознать квартиру";
+
+
+
+
         public AddressStructure(string s)
         {
             try
@@ -50,7 +61,7 @@ namespace LibraryForICN
                 this.City = ParseCity(s);       //может вернуть город по умолчанию
                 this.Street = ParseStreet(s);   //если не указано - вернуть ошибку
                 this.House = ParseHouse(s);     //если не указано - вернуть ошибку
-                if ((this.Street == "Не удалось распознать улицу") || (this.House == "Не удалось распознать дом"))
+                if ((this.Street == StreetError) || (this.House == HouseError))
                 {
                     this.CorrectAddress = false; //в случае отсутствия улицы/дома считаем адрес некорректным
                 }
@@ -74,7 +85,7 @@ namespace LibraryForICN
                 if (this.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
                 {
 
-                    if ((this.Index != "Не удалось распознать индекс") || (this.Index != ""))
+                    if ((this.Index != IndexError) || (this.Index != ""))
                     {
                         result = result + this.Index + ", ";  //индекс не назначается по умолчанию, опустим его
                     }
@@ -105,7 +116,7 @@ namespace LibraryForICN
 
                     result = result + "ул. " + this.Street + ", ";
                     result = result + "д. " + this.House;
-                    if ((this.Flat != "Не удалось распознать квартиру") && (this.Flat != ""))
+                    if ((this.Flat != FlatError) && (this.Flat != ""))
                     {
                         result = result + ", кв. " + this.Flat;
                     }
@@ -236,7 +247,7 @@ namespace LibraryForICN
                 string index = "";                              //ищем участок следующего вида: 
                 Regex regex1 = new Regex(@",(\s*\d{6}\s*),+.*");  //запятая, любое количество пробелов, минимум одна цифра, любое количетсво пробелов, запятая, последующий текст
                 index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
-                if (index == "") index = "Не удалось распознать индекс";
+                if (index == "") index = IndexError;
                 return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
             }
             catch (Exception ex)
@@ -305,7 +316,7 @@ namespace LibraryForICN
                 Regex regex1 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*(?:\.|\s)+((?:[0-9]|[А-я]|-|\s)+)\s*,"); //запятая, признак улицы, разделитель, название может состоять из цифр, букв, пробелов, пробелы, запятая
                 Regex regex2 = new Regex(@",\s*(?:у|У)(?:[а-я]|-)*\s*([А-Я](?:[А-я]|-|\s)+)\s*,"); //запятая, признак улицы маленькими буквами, может быть разделитель, большие буквы, пробелы, тире в названии
                 street = MatchWithTwoRegex(regex1, regex2, s);
-                if (street == "") street = "Не удалось распознать улицу"; //возвращаем значение по умолчанию, ошибк
+                if (street == "") street = StreetError; //возвращаем значение по умолчанию, ошибк
                 return street.Trim();
             }
             catch (Exception ex)
@@ -322,7 +333,7 @@ namespace LibraryForICN
                 Regex regex1 = new Regex(@",\s*(?:д|Д)(?:[А-я]|-)*(?:\.|\s)*(\d+(?:/|\s|[А-я])*\d*)\s*,"); //запятая, признак дома, разделитель, цифры, '/', буквы, снова цифры, пробелы, окончание адреса
                 MatchCollection matches = regex1.Matches(s);
                 house = MatchWithOneRegex(regex1, s);
-                if (house == "") house = "Не удалось распознать дом";
+                if (house == "") house = HouseError;
                 return house.Trim();
             }
             catch (Exception ex)
@@ -338,7 +349,7 @@ namespace LibraryForICN
                 string flat = "";
                 Regex regex1 = new Regex(@",\s*(?:к|К)(?:[А-я]|-)*(?:\.|\s)*(\d+)\s*,"); //запятая, признак квартиры, продолжение, разделитель, номер, пробелы, запятая, окончание адреса
                 flat = MatchWithOneRegex(regex1, s);
-                if (flat == "") flat = "Не удалось распознать квартиру";
+                if (flat == "") flat = FlatError;
                 return flat.Trim();
             }
             catch (Exception ex)
