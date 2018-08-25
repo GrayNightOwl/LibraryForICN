@@ -39,15 +39,18 @@ namespace LibraryForICN
     public class AddressStructure
     {
         const string IndexError = "Не удалось распознать индекс";
-        const string RegionError = "";
-        const string AreaError = "";
-        const string CityError = "";
         const string StreetError = "Не удалось распознать улицу";
         const string HouseError = "Не удалось распознать дом";
         const string FlatError = "Не удалось распознать квартиру";
 
 
-
+        const string IndexException = "При попытке разобрать индекс возникло исключение ";
+        const string RegionException = "При попытке разобрать регион возникло исключение ";
+        const string AreaException = "При попытке разобрать район возникло исключение ";
+        const string CityException = "При попытке разобрать населённый пункт возникло исключение ";
+        const string StreetException = "При попытке разобрать улицу возникло исключение ";
+        const string HouseException = "При попытке разобрать дом возникло исключение ";
+        const string FlatException = "При попытке разобрать квартиру возникло исключение ";
 
         public AddressStructure(string s)
         {
@@ -55,7 +58,7 @@ namespace LibraryForICN
             {
                 this.CorrectAddress = true; //изначально считаем адрес корректным
                 s = "," + s + ",";           //"окаймим" строку запятыми для отделения участков по запятым с двух сторон
-                this.Index = ParseIndex(s);     //может вернуть индекс по умолчанию
+                this.Index = ParseIndex(s);     //не может вернуть индекс по умолчанию
                 this.Region = ParseRegion(s);   //может вернуть регион по умолчанию
                 this.Area = ParseArea(s);       //не вернёт район по умолчанию, иначе все адреса будут сельскими
                 this.City = ParseCity(s);       //может вернуть город по умолчанию
@@ -71,7 +74,7 @@ namespace LibraryForICN
             catch (Exception ex)
             {
                 this.CorrectAddress = false; //считаем его ошибочным
-                this.Region = "При разборке адреса возникло исключение " + Convert.ToString(ex);
+                this.Error = "При разборке адреса возникло исключение " + Convert.ToString(ex);
             }
         }
 
@@ -228,6 +231,18 @@ namespace LibraryForICN
             }
         }
 
+        public string Error
+        {
+            get
+            {
+                return error;
+            }
+            set
+            {
+                error = value;
+            }
+        }
+
 
 
         private bool correctAddress;
@@ -238,6 +253,7 @@ namespace LibraryForICN
         private string street;
         private string house;
         private string flat;
+        private string error;
 
         private string ParseIndex(string s)
         {
@@ -249,10 +265,13 @@ namespace LibraryForICN
                 index = MatchWithOneRegex(regex1, s);           //применяем регулярное выражение к строке
                 if (index == "") index = IndexError;
                 return index.Trim();                            //вернём значение, лишённое пробелов с левой и правой стороны
+
+
+                
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать индекс возникло исключение " + Convert.ToString(ex));
+                throw new Exception(IndexException + ex.InnerException);
             }
         }
 
@@ -270,7 +289,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать регион возникло исключение " + Convert.ToString(ex));
+                throw new Exception(RegionException + Convert.ToString(ex));
             }
         }
 
@@ -287,7 +306,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать район возникло исключение " + Convert.ToString(ex));
+                throw new Exception(AreaException + Convert.ToString(ex));
             }
         }
 
@@ -304,7 +323,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать населённый пункт возникло исключение " + Convert.ToString(ex));
+                throw new Exception(CityException + Convert.ToString(ex));
             }
         }
 
@@ -321,7 +340,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать улицу возникло исключение " + Convert.ToString(ex));
+                throw new Exception(StreetException + Convert.ToString(ex));
             }
         }
 
@@ -338,7 +357,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать дом возникло исключение " + Convert.ToString(ex));
+                throw new Exception(HouseException + Convert.ToString(ex));
             }
         }
 
@@ -354,7 +373,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("При попытке разобрать квартиру возникло исключение " + Convert.ToString(ex));
+                throw new Exception(FlatException + Convert.ToString(ex));
             }
         }
 

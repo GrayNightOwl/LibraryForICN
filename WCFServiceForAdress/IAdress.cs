@@ -70,6 +70,10 @@ namespace WCFServiceForAdress
         [DataMember]
         public string flat;
 
+        [DataMember]
+        public string error;
+
+
 
         // This is not serialized because the DataMemberAttribute 
         // has not been applied.

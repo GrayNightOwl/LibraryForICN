@@ -32,6 +32,7 @@ namespace WCFServiceForAdress
                 ATresult.street = addr.Street;
                 ATresult.house = addr.House;
                 ATresult.flat = addr.Flat;
+                ATresult.error = addr.Error;
             }
             else
                 ATresult.CorrectAddress = false; //как это передаётся пользователю?
