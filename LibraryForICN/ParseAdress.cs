@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LibraryForICN;
 
 /*
  Для запуска программы следует сначала собрать проект LibraryForICN, затем собрать оставшиеся два проекта: LibraryForICNTests, WCFServiceAdress
@@ -35,7 +36,6 @@ namespace LibraryForICN
      * Сделать логирование ошибок сервиса или действий пользователя вообще
      */
 
-
     public class AddressStructure
     { 
         public AddressStructure(string s)
@@ -63,6 +63,8 @@ namespace LibraryForICN
                 this.Region = "При разборке адреса возникло исключение " + Convert.ToString(ex);
             }
         }
+
+        public AddressStructure() { }
 
         public string CompileAddress()
         {
@@ -117,6 +119,7 @@ namespace LibraryForICN
                 return ("При сборке адреса возникло исключение " + Convert.ToString(ex));
             }
         }
+
 
         public bool CorrectAddress
         {
