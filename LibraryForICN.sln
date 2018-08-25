@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryForICN", "LibraryFor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryForICNTests", "LibraryForICNTests\LibraryForICNTests.csproj", "{BA67678D-3EC5-4E0B-B0B6-86BD2B826177}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17BDDEA6-2408-4C4B-8007-81A0779DE16A}"
+	ProjectSection(SolutionItems) = preProject
+		TestForLibrary-soapui-project.xml = TestForLibrary-soapui-project.xml
+		Прочи меня.txt = Прочи меня.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
