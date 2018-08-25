@@ -84,7 +84,7 @@ namespace LibraryForICN
                 if (this.CorrectAddress == true) //если адрес корректный - то улица и дом распознаны, прибавим их
                 {
 
-                    if ((this.Index != IndexError) || (this.Index != ""))
+                    if ((this.Index != IndexError) && (this.Index != ""))
                     {
                         result.Append(this.Index + ", ");  //индекс не назначается по умолчанию, опустим его
                     }
