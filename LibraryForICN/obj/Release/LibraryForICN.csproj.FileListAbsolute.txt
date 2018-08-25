@@ -1,0 +1,6 @@
+C:\Users\Администратор\source\repos\LibraryForICN\LibraryForICN\bin\Release\LibraryForICN.dll
+C:\Users\Администратор\source\repos\LibraryForICN\LibraryForICN\bin\Release\LibraryForICN.pdb
+C:\Users\Администратор\source\repos\LibraryForICN\LibraryForICN\obj\Release\LibraryForICN.csprojAssemblyReference.cache
+C:\Users\Администратор\source\repos\LibraryForICN\LibraryForICN\obj\Release\LibraryForICN.csproj.CoreCompileInputs.cache
+C:\Users\Администратор\source\repos\LibraryForICN\LibraryForICN\obj\Release\LibraryForICN.dll
+C:\Users\Администратор\source\repos\LibraryForICN\LibraryForICN\obj\Release\LibraryForICN.pdb
