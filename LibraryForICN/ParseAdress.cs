@@ -11,6 +11,7 @@ using LibraryForICN;
 /// Далее следует запустить WCFServiceAdress на отладку/выполнение,подключиться с помощью программы SoapUI к странице проекта на IIS.
 ///Затем открыть с помощью SoapUI файл "TestUPD2-soapui-project.xml" и провести необходимые тесты.
 ///Модульные тесты библиотеки следует выполнять с помощью файла UnitTest1.cs в проекте LibraryForICNTest.
+///Большая часть тестов находится в UnitTests, лишь малая часть лежит в SoapUI
 /// </summary>
 
 
@@ -269,6 +270,10 @@ namespace LibraryForICN
         const string StreetException = "При попытке разобрать улицу возникло исключение ";
         const string HouseException = "При попытке разобрать дом возникло исключение ";
         const string FlatException = "При попытке разобрать квартиру возникло исключение ";
+        const string OneRegexException = "Во время применения одного регулярного выражения возникло исключение ";
+        const string TwoRegexException = "Во время применения двух регулярных выражений возникло исключение ";
+        const string ThreeRegexException = "Во время применения трёх регулярных выражений возникло исключение ";
+
 
         /// <summary>
         /// Метод, используемый для нахождения индекса в строке.
@@ -453,7 +458,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("Во время применения одного регулярного выражения возникло исключение " + Convert.ToString(ex));
+                return (OneRegexException + Convert.ToString(ex));
             }
         }
 
@@ -476,7 +481,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("Во время применения двух регулярных выражений возникло исключение " + Convert.ToString(ex));
+                return (TwoRegexException + Convert.ToString(ex));
             }
         }
 
@@ -502,7 +507,7 @@ namespace LibraryForICN
             }
             catch (Exception ex)
             {
-                return ("Во время применения трёх регулярных выражений возникло исключение " + Convert.ToString(ex));
+                return (ThreeRegexException+ Convert.ToString(ex));
             }
         }
 
