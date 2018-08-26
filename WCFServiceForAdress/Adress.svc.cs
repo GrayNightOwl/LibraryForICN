@@ -52,7 +52,7 @@ namespace WCFServiceForAdress
             else
             {
                 ATresult.CorrectAddress = false;
-                ATresult.error = addr.Error;
+                ATresult.error = addr.Error;  
             }
             return ATresult;
         }
