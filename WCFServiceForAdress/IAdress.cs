@@ -53,7 +53,7 @@ namespace WCFServiceForAdress
             }
             else
             {
-                temp.CorrectAddress = true; //искуственно выставляем флаг корректности, так как необходимо 
+                temp.CorrectAddress = true; //искуственно выставляем флаг корректности, так как необходимо иметь рабочий адрес
                 temp.Index = index;
                 temp.Region = region;
                 temp.Area = area;
